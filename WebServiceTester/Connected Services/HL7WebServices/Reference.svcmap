@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="https://localhost:44391/HL7MessageReceiver.asmx?WSDL" Protocol="http" SourceId="1" />
+    <MetadataSource Address="http://cpc-intapptst01/HL7WebServices/HL7MessageReceiver.asmx?WSDL" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="HL7MessageReceiver.wsdl" MetadataType="Wsdl" ID="4db4ee9b-b643-41ea-97cc-3b8d560c6c42" SourceId="1" SourceUrl="https://localhost:44391/HL7MessageReceiver.asmx?WSDL" />
+    <MetadataFile FileName="HL7MessageReceiver1.wsdl" MetadataType="Wsdl" ID="a8c1693e-40ba-4eb9-9937-5a3b9de4130f" SourceId="1" SourceUrl="http://cpc-intapptst01/HL7WebServices/HL7MessageReceiver.asmx?WSDL" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

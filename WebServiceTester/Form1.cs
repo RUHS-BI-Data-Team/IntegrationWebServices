@@ -7,6 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data;
+using System.Data.SqlClient;
 
 namespace WebServiceTester
 {
@@ -27,16 +29,15 @@ namespace WebServiceTester
 
         private void btnOpenFile_Click(object sender, EventArgs e)
         {
-            string FileName;
-            DialogResult rst;
-            rst = OpenXMLFile.ShowDialog();
-            if (rst.ToString() == "OK")
-            {
-                FileName = OpenXMLFile.FileName;
-                textBox1.Text = System.IO.File.ReadAllText(FileName);
-                //textBox2.Text = ws.CalREDIEHL7MessageReceipt(System.IO.File.ReadAllText(FileName));
-            }
-
+            SqlConnection cn = new SqlConnection("Data Source=IntegrationDB;Initial Catalog=HL7Data;Integrated Security=True; timeout= 120");
+            SqlCommand cm = new SqlCommand("Select Top 1 * from tblADT", cn);
+            SqlDataReader dr;
+            cn.Open();
+            dr = cm.ExecuteReader();
+            dr.Read();
+            textBox2.Text = ws.AddHL7MessageToWarehouse("ADT Message", "Security", dr["HL7Data"].ToString());
+            dr.Close();
+            cn.Close();
         }
     }
 }

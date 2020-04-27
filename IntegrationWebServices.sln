@@ -10,6 +10,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WebServiceTester", "WebServ
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HL7Messages", "HL7Messages\HL7Messages.csproj", "{31102D4B-CD46-4825-997F-BCDD80D76225}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HL7ParseAndScub", "..\HL7Tools\HL7ParseAndScub\HL7ParseAndScub.csproj", "{ADDB67AE-815A-42A0-9D55-E42A3D93FAC0}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -24,6 +26,10 @@ Global
 		{31102D4B-CD46-4825-997F-BCDD80D76225}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{31102D4B-CD46-4825-997F-BCDD80D76225}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{31102D4B-CD46-4825-997F-BCDD80D76225}.Release|Any CPU.Build.0 = Release|Any CPU
+		{ADDB67AE-815A-42A0-9D55-E42A3D93FAC0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ADDB67AE-815A-42A0-9D55-E42A3D93FAC0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ADDB67AE-815A-42A0-9D55-E42A3D93FAC0}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{ADDB67AE-815A-42A0-9D55-E42A3D93FAC0}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
