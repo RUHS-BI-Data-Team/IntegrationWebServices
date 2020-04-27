@@ -1,0 +1,11 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<configurationSnapshot xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns="urn:schemas-microsoft-com:xml-wcfconfigurationsnapshot">
+  <behaviors />
+  <bindings>
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;HL7MessageReceiverSoap&quot;&gt;&lt;security mode=&quot;Transport&quot; /&gt;&lt;/Data&gt;" bindingType="basicHttpBinding" name="HL7MessageReceiverSoap" />
+    <binding digest="System.ServiceModel.Configuration.BasicHttpBindingElement, System.ServiceModel, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089:&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data name=&quot;HL7MessageReceiverSoap1&quot; /&gt;" bindingType="basicHttpBinding" name="HL7MessageReceiverSoap1" />
+  </bindings>
+  <endpoints>
+    <endpoint normalizedDigest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://localhost:44391/HL7MessageReceiver.asmx&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;HL7MessageReceiverSoap&quot; contract=&quot;HL7WebServices.HL7MessageReceiverSoap&quot; name=&quot;HL7MessageReceiverSoap&quot; /&gt;" digest="&lt;?xml version=&quot;1.0&quot; encoding=&quot;utf-16&quot;?&gt;&lt;Data address=&quot;https://localhost:44391/HL7MessageReceiver.asmx&quot; binding=&quot;basicHttpBinding&quot; bindingConfiguration=&quot;HL7MessageReceiverSoap&quot; contract=&quot;HL7WebServices.HL7MessageReceiverSoap&quot; name=&quot;HL7MessageReceiverSoap&quot; /&gt;" contractName="HL7WebServices.HL7MessageReceiverSoap" name="HL7MessageReceiverSoap" />
+  </endpoints>
+</configurationSnapshot>
