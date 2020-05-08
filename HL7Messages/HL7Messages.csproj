@@ -76,6 +76,7 @@
       <SubType>Component</SubType>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="ReturnDataForInterface.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="packages.config" />
