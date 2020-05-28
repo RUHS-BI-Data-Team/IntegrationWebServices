@@ -9,17 +9,64 @@
 //------------------------------------------------------------------------------
 
 namespace WebServiceTester.HL7WebServices {
+    using System.Runtime.Serialization;
+    using System;
     
+    
+    [System.Diagnostics.DebuggerStepThroughAttribute()]
+    [System.CodeDom.Compiler.GeneratedCodeAttribute("System.Runtime.Serialization", "4.0.0.0")]
+    [System.Runtime.Serialization.DataContractAttribute(Name="ValidateReturn", Namespace="http://www.RUHealth.org")]
+    [System.SerializableAttribute()]
+    public partial class ValidateReturn : object, System.Runtime.Serialization.IExtensibleDataObject, System.ComponentModel.INotifyPropertyChanged {
+        
+        [System.NonSerializedAttribute()]
+        private System.Runtime.Serialization.ExtensionDataObject extensionDataField;
+        
+        [System.Runtime.Serialization.OptionalFieldAttribute()]
+        private string ValidateField;
+        
+        [global::System.ComponentModel.BrowsableAttribute(false)]
+        public System.Runtime.Serialization.ExtensionDataObject ExtensionData {
+            get {
+                return this.extensionDataField;
+            }
+            set {
+                this.extensionDataField = value;
+            }
+        }
+        
+        [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false)]
+        public string Validate {
+            get {
+                return this.ValidateField;
+            }
+            set {
+                if ((object.ReferenceEquals(this.ValidateField, value) != true)) {
+                    this.ValidateField = value;
+                    this.RaisePropertyChanged("Validate");
+                }
+            }
+        }
+        
+        public event System.ComponentModel.PropertyChangedEventHandler PropertyChanged;
+        
+        protected void RaisePropertyChanged(string propertyName) {
+            System.ComponentModel.PropertyChangedEventHandler propertyChanged = this.PropertyChanged;
+            if ((propertyChanged != null)) {
+                propertyChanged(this, new System.ComponentModel.PropertyChangedEventArgs(propertyName));
+            }
+        }
+    }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    [System.ServiceModel.ServiceContractAttribute(Namespace="http://RUHealth.org/", ConfigurationName="HL7WebServices.HL7MessageReceiverSoap")]
-    public interface HL7MessageReceiverSoap {
+    [System.ServiceModel.ServiceContractAttribute(Namespace="http://www.RUHealth.org", ConfigurationName="HL7WebServices.InterfaceWebServicesSoap")]
+    public interface InterfaceWebServicesSoap {
         
-        // CODEGEN: Generating message contract since element name MessageType from namespace http://RUHealth.org/ is not marked nillable
-        [System.ServiceModel.OperationContractAttribute(Action="http://RUHealth.org/AddHL7MessageToWarehouse", ReplyAction="*")]
+        // CODEGEN: Generating message contract since element name MessageType from namespace http://www.RUHealth.org is not marked nillable
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.RUHealth.org/AddHL7MessageToWarehouse", ReplyAction="*")]
         WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse AddHL7MessageToWarehouse(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request);
         
-        [System.ServiceModel.OperationContractAttribute(Action="http://RUHealth.org/AddHL7MessageToWarehouse", ReplyAction="*")]
+        [System.ServiceModel.OperationContractAttribute(Action="http://www.RUHealth.org/AddHL7MessageToWarehouse", ReplyAction="*")]
         System.Threading.Tasks.Task<WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse> AddHL7MessageToWarehouseAsync(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request);
     }
     
@@ -29,7 +76,7 @@ namespace WebServiceTester.HL7WebServices {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class AddHL7MessageToWarehouseRequest {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddHL7MessageToWarehouse", Namespace="http://RUHealth.org/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddHL7MessageToWarehouse", Namespace="http://www.RUHealth.org", Order=0)]
         public WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequestBody Body;
         
         public AddHL7MessageToWarehouseRequest() {
@@ -43,7 +90,7 @@ namespace WebServiceTester.HL7WebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://RUHealth.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.RUHealth.org")]
     public partial class AddHL7MessageToWarehouseRequestBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
@@ -71,7 +118,7 @@ namespace WebServiceTester.HL7WebServices {
     [System.ServiceModel.MessageContractAttribute(IsWrapped=false)]
     public partial class AddHL7MessageToWarehouseResponse {
         
-        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddHL7MessageToWarehouseResponse", Namespace="http://RUHealth.org/", Order=0)]
+        [System.ServiceModel.MessageBodyMemberAttribute(Name="AddHL7MessageToWarehouseResponse", Namespace="http://www.RUHealth.org", Order=0)]
         public WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponseBody Body;
         
         public AddHL7MessageToWarehouseResponse() {
@@ -85,64 +132,64 @@ namespace WebServiceTester.HL7WebServices {
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
     [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://RUHealth.org/")]
+    [System.Runtime.Serialization.DataContractAttribute(Namespace="http://www.RUHealth.org")]
     public partial class AddHL7MessageToWarehouseResponseBody {
         
         [System.Runtime.Serialization.DataMemberAttribute(EmitDefaultValue=false, Order=0)]
-        public string AddHL7MessageToWarehouseResult;
+        public WebServiceTester.HL7WebServices.ValidateReturn AddHL7MessageToWarehouseResult;
         
         public AddHL7MessageToWarehouseResponseBody() {
         }
         
-        public AddHL7MessageToWarehouseResponseBody(string AddHL7MessageToWarehouseResult) {
+        public AddHL7MessageToWarehouseResponseBody(WebServiceTester.HL7WebServices.ValidateReturn AddHL7MessageToWarehouseResult) {
             this.AddHL7MessageToWarehouseResult = AddHL7MessageToWarehouseResult;
         }
     }
     
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public interface HL7MessageReceiverSoapChannel : WebServiceTester.HL7WebServices.HL7MessageReceiverSoap, System.ServiceModel.IClientChannel {
+    public interface InterfaceWebServicesSoapChannel : WebServiceTester.HL7WebServices.InterfaceWebServicesSoap, System.ServiceModel.IClientChannel {
     }
     
     [System.Diagnostics.DebuggerStepThroughAttribute()]
     [System.CodeDom.Compiler.GeneratedCodeAttribute("System.ServiceModel", "4.0.0.0")]
-    public partial class HL7MessageReceiverSoapClient : System.ServiceModel.ClientBase<WebServiceTester.HL7WebServices.HL7MessageReceiverSoap>, WebServiceTester.HL7WebServices.HL7MessageReceiverSoap {
+    public partial class InterfaceWebServicesSoapClient : System.ServiceModel.ClientBase<WebServiceTester.HL7WebServices.InterfaceWebServicesSoap>, WebServiceTester.HL7WebServices.InterfaceWebServicesSoap {
         
-        public HL7MessageReceiverSoapClient() {
+        public InterfaceWebServicesSoapClient() {
         }
         
-        public HL7MessageReceiverSoapClient(string endpointConfigurationName) : 
+        public InterfaceWebServicesSoapClient(string endpointConfigurationName) : 
                 base(endpointConfigurationName) {
         }
         
-        public HL7MessageReceiverSoapClient(string endpointConfigurationName, string remoteAddress) : 
+        public InterfaceWebServicesSoapClient(string endpointConfigurationName, string remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public HL7MessageReceiverSoapClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public InterfaceWebServicesSoapClient(string endpointConfigurationName, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(endpointConfigurationName, remoteAddress) {
         }
         
-        public HL7MessageReceiverSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
+        public InterfaceWebServicesSoapClient(System.ServiceModel.Channels.Binding binding, System.ServiceModel.EndpointAddress remoteAddress) : 
                 base(binding, remoteAddress) {
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse WebServiceTester.HL7WebServices.HL7MessageReceiverSoap.AddHL7MessageToWarehouse(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request) {
+        WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse WebServiceTester.HL7WebServices.InterfaceWebServicesSoap.AddHL7MessageToWarehouse(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request) {
             return base.Channel.AddHL7MessageToWarehouse(request);
         }
         
-        public string AddHL7MessageToWarehouse(string MessageType, string Passphrase, string HL7Message) {
+        public WebServiceTester.HL7WebServices.ValidateReturn AddHL7MessageToWarehouse(string MessageType, string Passphrase, string HL7Message) {
             WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest inValue = new WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest();
             inValue.Body = new WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequestBody();
             inValue.Body.MessageType = MessageType;
             inValue.Body.Passphrase = Passphrase;
             inValue.Body.HL7Message = HL7Message;
-            WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse retVal = ((WebServiceTester.HL7WebServices.HL7MessageReceiverSoap)(this)).AddHL7MessageToWarehouse(inValue);
+            WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse retVal = ((WebServiceTester.HL7WebServices.InterfaceWebServicesSoap)(this)).AddHL7MessageToWarehouse(inValue);
             return retVal.Body.AddHL7MessageToWarehouseResult;
         }
         
         [System.ComponentModel.EditorBrowsableAttribute(System.ComponentModel.EditorBrowsableState.Advanced)]
-        System.Threading.Tasks.Task<WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse> WebServiceTester.HL7WebServices.HL7MessageReceiverSoap.AddHL7MessageToWarehouseAsync(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request) {
+        System.Threading.Tasks.Task<WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse> WebServiceTester.HL7WebServices.InterfaceWebServicesSoap.AddHL7MessageToWarehouseAsync(WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseRequest request) {
             return base.Channel.AddHL7MessageToWarehouseAsync(request);
         }
         
@@ -152,7 +199,7 @@ namespace WebServiceTester.HL7WebServices {
             inValue.Body.MessageType = MessageType;
             inValue.Body.Passphrase = Passphrase;
             inValue.Body.HL7Message = HL7Message;
-            return ((WebServiceTester.HL7WebServices.HL7MessageReceiverSoap)(this)).AddHL7MessageToWarehouseAsync(inValue);
+            return ((WebServiceTester.HL7WebServices.InterfaceWebServicesSoap)(this)).AddHL7MessageToWarehouseAsync(inValue);
         }
     }
 }

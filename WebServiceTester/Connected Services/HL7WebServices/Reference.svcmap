@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="205c3f21-562f-495a-a4dd-84621a4f7c2f" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="ba3aae0e-8416-4978-b0e7-4215a64eb462" xmlns="urn:schemas-microsoft-com:xml-wcfservicemap">
   <ClientOptions>
     <GenerateAsynchronousMethods>false</GenerateAsynchronousMethods>
     <GenerateTaskBasedAsynchronousMethod>true</GenerateTaskBasedAsynchronousMethod>
@@ -19,10 +19,10 @@
     <ServiceContractMappings />
   </ClientOptions>
   <MetadataSources>
-    <MetadataSource Address="http://cpc-intapptst01/HL7WebServices/HL7MessageReceiver.asmx?WSDL" Protocol="http" SourceId="1" />
+    <MetadataSource Address="https://localhost:44391/HL7MessageReceiver.asmx?WSDL" Protocol="http" SourceId="1" />
   </MetadataSources>
   <Metadata>
-    <MetadataFile FileName="HL7MessageReceiver1.wsdl" MetadataType="Wsdl" ID="a8c1693e-40ba-4eb9-9937-5a3b9de4130f" SourceId="1" SourceUrl="http://cpc-intapptst01/HL7WebServices/HL7MessageReceiver.asmx?WSDL" />
+    <MetadataFile FileName="HL7MessageReceiver.wsdl" MetadataType="Wsdl" ID="6806ebde-dab7-4a0c-84bc-2efd5d6cde3f" SourceId="1" SourceUrl="https://localhost:44391/HL7MessageReceiver.asmx?WSDL" />
   </Metadata>
   <Extensions>
     <ExtensionFile FileName="configuration91.svcinfo" Name="configuration91.svcinfo" />

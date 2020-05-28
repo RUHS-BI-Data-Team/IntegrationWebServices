@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.Data;
 using System.Data.SqlClient;
 
 namespace WebServiceTester
@@ -18,13 +17,14 @@ namespace WebServiceTester
         {
             InitializeComponent();
         }
-        HL7WebServices.HL7MessageReceiverSoapClient ws = new HL7WebServices.HL7MessageReceiverSoapClient();
+        HL7WebServices.InterfaceWebServicesSoapClient ws = new HL7WebServices.InterfaceWebServicesSoapClient();
         private void button1_Click(object sender, EventArgs e)
 
         {
-            //CalRedieServices.CalREDIEServicesSoapClient ws = new CalRedieServices.CalREDIEServicesSoapClient();
-            textBox2.Text=ws.AddHL7MessageToWarehouse("ADT Message","Security",textBox1.Text);
-
+            //ws.AddHL7MessageToWarehouse()
+            ////CalRedieServices.CalREDIEServicesSoapClient ws = new CalRedieServices.CalREDIEServicesSoapClient();
+            //textBox2.Text=ws.AddHL7MessageToWarehouse("ADT Message","Security",textBox1.Text);
+            
         }
 
         private void btnOpenFile_Click(object sender, EventArgs e)
@@ -35,7 +35,8 @@ namespace WebServiceTester
             cn.Open();
             dr = cm.ExecuteReader();
             dr.Read();
-            textBox2.Text = ws.AddHL7MessageToWarehouse("ADT Message", "Security", dr["HL7Data"].ToString());
+            textBox1.Text = dr["HL7Data"].ToString();
+            textBox2.Text = ws.AddHL7MessageToWarehouse("ADT Message", "Security", dr["HL7Data"].ToString()).ToString();
             dr.Close();
             cn.Close();
         }

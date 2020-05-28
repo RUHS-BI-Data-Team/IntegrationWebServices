@@ -88,8 +88,11 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
-    <None Include="Connected Services\HL7WebServices\HL7MessageReceiver1.wsdl" />
+    <None Include="Connected Services\HL7WebServices\HL7MessageReceiver.wsdl" />
     <None Include="Connected Services\HL7WebServices\WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HL7WebServices\WebServiceTester.HL7WebServices.ValidateReturn.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
     </None>
     <None Include="Properties\Settings.settings">

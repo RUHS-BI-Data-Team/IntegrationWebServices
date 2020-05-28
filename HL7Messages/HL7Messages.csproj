@@ -68,9 +68,12 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ADTData.cs" />
     <Compile Include="ArcGISReultsFormat.cs" />
+    <Compile Include="DBFunctions.cs" />
     <Compile Include="GeoCode.cs" />
     <Compile Include="GeoCodeResult.cs" />
+    <Compile Include="HL7Functions.cs" />
     <Compile Include="HL7MessageReceiver.asmx.cs">
       <DependentUpon>HL7MessageReceiver.asmx</DependentUpon>
       <SubType>Component</SubType>
@@ -95,6 +98,7 @@
     <ProjectReference Include="..\..\HL7Tools\HL7ParseAndScub\HL7ParseAndScub.csproj">
       <Project>{addb67ae-815a-42a0-9d55-e42a3d93fac0}</Project>
       <Name>HL7ParseAndScub</Name>
+      <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
   </ItemGroup>
   <PropertyGroup>
