@@ -10,6 +10,8 @@ using System.Xml.Linq;
 using System.Web.Script.Services;
 using System.Web.Script.Serialization;
 using System.Web.Services.Protocols;
+using System.Configuration;
+using System.Web.UI.WebControls;
 
 namespace HL7Messages
 {
@@ -18,31 +20,41 @@ namespace HL7Messages
 
     public class HL7MessageReceiver : System.Web.Services.WebService
     {
-        //[WebMethod]
-        //[SoapDocumentMethod]
-        //public AckNakReturn AddHL7MessageToWarehouseAckNak(//[XmlElement(ElementName  = "AckNack", Namespace = "http://www.RUHealth.org")]
-        //string MessageType, String Passphrase, String HL7Message)
-        //{
-        //    AckNakReturn r = new AckNakReturn();
-        //    r.AckNak = r.Nak;
-        //    r.NakReason = "Reason will be entered here";
-        //    return r;
-        //}
-
+       
         [WebMethod]
         [SoapDocumentMethod]
         public ValidateReturn AddHL7MessageToWarehouse(//[XmlElement(ElementName  = "AckNack", Namespace = "http://www.RUHealth.org")]
         string MessageType, String Passphrase, String HL7Message)
         {
-
-            ADTData d = new ADTData(HL7Message);
-            //ProcessADTWarehouseMessage(HL7Message);
-            System.Xml.Serialization.XmlSerializer x = new System.Xml.Serialization.XmlSerializer(d.GetType());
-            System.IO.StringWriter writer = new System.IO.StringWriter();
-            x.Serialize(writer, d);
-
             ValidateReturn r = new ValidateReturn();
-            r.Validate = Passphrase;
+            string conn = ConfigurationManager.ConnectionStrings["HL7Warehouse"].ConnectionString;
+            ADTData d = new ADTData();
+            DBFunctions dbf = new DBFunctions();
+            string CheckErrorMessage="";
+            string LoadErrorMessage = "";
+            switch(dbf.CheckForExistingADTContreolID(conn, d.GetControlId(HL7Message), ref CheckErrorMessage))
+            {
+                case 0:
+                    d.HL7Message = HL7Message;
+                    if (dbf.InsertADTMessage(conn, d,ref LoadErrorMessage) == true)
+                    {
+                        r.Validate = Passphrase;
+                    }
+                    else
+                    {
+                        r.Validate = LoadErrorMessage;
+                        //r.Validate = "Error Loading Data into Databse";
+                    }
+                    break;
+                case 1:
+                    r.Validate = Passphrase;
+                    break;
+                case 2:
+                    r.Validate = CheckErrorMessage;
+                    //r.Validate = "error Checking for existing HL7 message";
+                    break;
+            }
+            
             return r;
         }
 

@@ -63,6 +63,11 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Connected Services\HL7WebServicesTest\Reference.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
     <Compile Include="Connected Services\HL7WebServices\Reference.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -88,6 +93,13 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="Connected Services\HL7WebServicesTest\HL7MessageReceiver.wsdl" />
+    <None Include="Connected Services\HL7WebServicesTest\WebServiceTester.HL7WebServicesTest.AddHL7MessageToWarehouseResponse.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
+    <None Include="Connected Services\HL7WebServicesTest\WebServiceTester.HL7WebServicesTest.ValidateReturn.datasource">
+      <DependentUpon>Reference.svcmap</DependentUpon>
+    </None>
     <None Include="Connected Services\HL7WebServices\HL7MessageReceiver.wsdl" />
     <None Include="Connected Services\HL7WebServices\WebServiceTester.HL7WebServices.AddHL7MessageToWarehouseResponse.datasource">
       <DependentUpon>Reference.svcmap</DependentUpon>
@@ -124,6 +136,7 @@
     </BootstrapperPackage>
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadataStorage Include="Connected Services\HL7WebServicesTest\" />
     <WCFMetadataStorage Include="Connected Services\HL7WebServices\" />
   </ItemGroup>
   <ItemGroup>
@@ -134,6 +147,18 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Connected Services\HL7WebServices\Reference.svcmap">
+      <Generator>WCF Proxy Generator</Generator>
+      <LastGenOutput>Reference.cs</LastGenOutput>
+    </None>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HL7WebServicesTest\configuration91.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HL7WebServicesTest\configuration.svcinfo" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Connected Services\HL7WebServicesTest\Reference.svcmap">
       <Generator>WCF Proxy Generator</Generator>
       <LastGenOutput>Reference.cs</LastGenOutput>
     </None>
