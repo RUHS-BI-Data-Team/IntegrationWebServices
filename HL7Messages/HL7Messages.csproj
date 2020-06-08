@@ -64,6 +64,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="HL7MessageReceiver.asmx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -73,6 +74,9 @@
     <Compile Include="DBFunctions.cs" />
     <Compile Include="GeoCode.cs" />
     <Compile Include="GeoCodeResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="HL7Functions.cs" />
     <Compile Include="HL7MessageReceiver.asmx.cs">
       <DependentUpon>HL7MessageReceiver.asmx</DependentUpon>

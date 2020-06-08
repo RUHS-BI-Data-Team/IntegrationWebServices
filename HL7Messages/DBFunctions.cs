@@ -5,12 +5,39 @@ using System.Web;
 using System.Data;
 using System.Data.SqlClient;
 using System.Runtime.CompilerServices;
+using System.IO;
 
 namespace HL7Messages
 {
     public class DBFunctions
     {
-        public int CheckForExistingADTContreolID(string connectionString, string ControlId,ref String ErrorMessage)
+        public String LoadMessageTypesFromDB(string connectionString, ref String ErrorMessage)
+        {
+            DataTable dt = new DataTable("Types");
+            StringWriter xmlTypes = new StringWriter();
+            SqlConnection cn = new SqlConnection(connectionString);
+            try
+            {
+                SqlCommand cm = new SqlCommand("uspSelectMessageTypes", cn);
+                cm.CommandType = CommandType.StoredProcedure;
+                SqlDataAdapter da = new SqlDataAdapter(cm);
+                cn.Open();
+                da.Fill(dt);
+                cn.Close();
+                dt.WriteXml(xmlTypes);
+                return xmlTypes.ToString();
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+                return "";
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
+        public int CheckForExistingADTContreolID(string connectionString, string ControlId, ref String ErrorMessage)
         {
             SqlConnection cn = new SqlConnection(connectionString);
             try
