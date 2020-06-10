@@ -13,7 +13,7 @@ namespace HL7Messages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            grdMessageTypes.DataSource = GetMessageTypes();
+            grdMessageTypes.DataSource = GetMessageTypes().Copy();
             grdMessageTypes.DataBind();
 
         }
@@ -40,6 +40,13 @@ namespace HL7Messages
             dt.Columns["Id"].AutoIncrement = true;
             dt.Columns["Id"].AutoIncrementStep = 1;
             dt.Columns["Id"].AutoIncrementSeed = 1;
+
+            DataRow dr = dt.NewRow();
+            dr["MessageType"] = "Sample Type";
+            dr["ProcessToRun"] = "Sample Process";
+            dr["SecurityValue"] = "Sample Security Value";
+            dr["EngineTypeName"] = "Sample Engine Type";
+            dt.Rows.Add(dr);
             return dt;
         }
         

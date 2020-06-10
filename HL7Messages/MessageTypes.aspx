@@ -9,7 +9,7 @@
 <body>
     <form id="form1" runat="server">
         <div>
-            <asp:GridView ID="grdMessageTypes" runat="server" AutoGenerateColumns="False" Caption="MessageTypes">
+            <asp:GridView ID="grdMessageTypes" runat="server" Caption="MessageTypes">
                 <Columns>
                     <asp:CommandField ShowEditButton="True" />
                     <asp:BoundField DataField="Id" />
