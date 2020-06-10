@@ -66,6 +66,7 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="HL7MessageReceiver.asmx" />
+    <Content Include="MessageTypes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
@@ -81,6 +82,13 @@
     <Compile Include="HL7MessageReceiver.asmx.cs">
       <DependentUpon>HL7MessageReceiver.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="MessageTypes.aspx.cs">
+      <DependentUpon>MessageTypes.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="MessageTypes.aspx.designer.cs">
+      <DependentUpon>MessageTypes.aspx</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataStructures.cs" />

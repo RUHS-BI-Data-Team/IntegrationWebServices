@@ -85,7 +85,7 @@ namespace HL7Messages
             return r;
         }
         private int GetMessageTypeProcess(string MessageType, String Passphrase) {
-            return 0;
+            return 1;
         }
     }
            
