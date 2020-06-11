@@ -28,28 +28,18 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.button1 = new System.Windows.Forms.Button();
-            this.textBox2 = new System.Windows.Forms.TextBox();
+            this.txtStart = new System.Windows.Forms.TextBox();
             this.OpenXMLFile = new System.Windows.Forms.OpenFileDialog();
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.txtTime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
+            this.txtAmount = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(66, 49);
-            this.textBox1.Multiline = true;
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(538, 122);
-            this.textBox1.TabIndex = 0;
-            this.textBox1.Text = resources.GetString("textBox1.Text");
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(610, 47);
+            this.button1.Location = new System.Drawing.Point(76, 257);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(75, 23);
             this.button1.TabIndex = 1;
@@ -57,12 +47,13 @@
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
-            // textBox2
+            // txtStart
             // 
-            this.textBox2.Location = new System.Drawing.Point(66, 202);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(538, 20);
-            this.textBox2.TabIndex = 2;
+            this.txtStart.Location = new System.Drawing.Point(12, 12);
+            this.txtStart.Name = "txtStart";
+            this.txtStart.Size = new System.Drawing.Size(75, 20);
+            this.txtStart.TabIndex = 2;
+            this.txtStart.Text = "0";
             // 
             // OpenXMLFile
             // 
@@ -71,7 +62,7 @@
             // 
             // btnOpenFile
             // 
-            this.btnOpenFile.Location = new System.Drawing.Point(66, 228);
+            this.btnOpenFile.Location = new System.Drawing.Point(12, 40);
             this.btnOpenFile.Name = "btnOpenFile";
             this.btnOpenFile.Size = new System.Drawing.Size(75, 23);
             this.btnOpenFile.TabIndex = 3;
@@ -82,7 +73,7 @@
             // 
             // txtTime
             // 
-            this.txtTime.Location = new System.Drawing.Point(255, 230);
+            this.txtTime.Location = new System.Drawing.Point(229, 38);
             this.txtTime.Name = "txtTime";
             this.txtTime.Size = new System.Drawing.Size(100, 20);
             this.txtTime.TabIndex = 4;
@@ -90,39 +81,47 @@
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(214, 230);
+            this.label1.Location = new System.Drawing.Point(193, 45);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(30, 13);
             this.label1.TabIndex = 5;
             this.label1.Text = "Time";
+            // 
+            // txtAmount
+            // 
+            this.txtAmount.Location = new System.Drawing.Point(107, 12);
+            this.txtAmount.Name = "txtAmount";
+            this.txtAmount.Size = new System.Drawing.Size(71, 20);
+            this.txtAmount.TabIndex = 6;
+            this.txtAmount.Text = "1000";
             // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.txtAmount);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTime);
             this.Controls.Add(this.btnOpenFile);
-            this.Controls.Add(this.textBox2);
+            this.Controls.Add(this.txtStart);
             this.Controls.Add(this.button1);
-            this.Controls.Add(this.textBox1);
             this.Name = "Form1";
             this.Text = "Form1";
+            this.Load += new System.EventHandler(this.Form1_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.TextBox textBox2;
+        private System.Windows.Forms.TextBox txtStart;
         private System.Windows.Forms.OpenFileDialog OpenXMLFile;
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.TextBox txtAmount;
     }
 }
 

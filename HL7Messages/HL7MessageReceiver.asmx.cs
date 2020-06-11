@@ -32,8 +32,7 @@ namespace HL7Messages
         DataTable dtTypes = new DataTable("Types");
         [WebMethod]
         [SoapDocumentMethod]
-        public ValidateReturn AddHL7MessageToWarehouse(//[XmlElement(ElementName  = "AckNack", Namespace = "http://www.RUHealth.org")]
-        string MessageType, String Passphrase, String HL7Message)
+        public ValidateReturn AddHL7MessageToWarehouse(string MessageType, String Passphrase, String HL7Message)
         {
             
             if (Application["MessageTypes"] is object)

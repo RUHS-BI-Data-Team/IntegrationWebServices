@@ -13,7 +13,7 @@ namespace HL7Messages
     {
         protected void Page_Load(object sender, EventArgs e)
         {
-            grdMessageTypes.DataSource = GetMessageTypes().Copy();
+            grdMessageTypes.DataSource = GetMessageTypes();
             grdMessageTypes.DataBind();
 
         }
@@ -26,6 +26,7 @@ namespace HL7Messages
             else
             {
                 dt = CreateDataTable();
+                dt.WriteXml("MessageTypes.xml");
             }
             return dt;
         }
