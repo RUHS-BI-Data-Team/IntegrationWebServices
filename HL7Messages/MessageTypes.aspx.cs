@@ -130,7 +130,7 @@ namespace HL7Messages
 
             if ((messagetype.Text.Length == 0) || (processtorun.Text.Length == 0) || (securityvalue.Text.Length == 0) || (enginetypename.Text.Length == 0))
             {
-                lblErrorMessage.Text = "Values in the row cannot be empty";
+                lblErrorMessage.Text = "Values in a row cannot be empty";
             }
             else
             {
