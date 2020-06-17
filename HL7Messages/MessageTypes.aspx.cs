@@ -130,7 +130,7 @@ namespace HL7Messages
 
             if ((messagetype.Text.Length == 0) || (processtorun.Text.Length == 0) || (securityvalue.Text.Length == 0) || (enginetypename.Text.Length == 0))
             {
-                lblErrorMessage.Text = "Values in a row cannot be empty";
+                lblErrorMessage.Text = "Please enter value in all the columns";
             }
             else
             {
@@ -190,17 +190,30 @@ namespace HL7Messages
                 dr = datatable.NewRow();
                 if (dr != null)
                 {
-                    dr["Id"] = datatable.Rows.Count + 1;
-                    dr["MessageType"] = (GridView1.FooterRow.FindControl("txt_MessageTypeFooter") as TextBox).Text.Trim();
-                    dr["ProcessToRun"] = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox).Text.Trim();
-                    dr["SecurityValue"] = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox).Text.Trim();
-                    dr["EngineTypeName"] = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox).Text.Trim();
+
+                    TextBox messagetypeFooter = (GridView1.FooterRow.FindControl("txt_MessageTypeFooter") as TextBox);
+                    TextBox processtorunFooter = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox);
+                    TextBox securityvalueFooter = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox);
+                    TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
+                    if ((messagetypeFooter.Text.Length == 0) || (processtorunFooter.Text.Length == 0) || (securityvalueFooter.Text.Length == 0) || (enginetypenameFooter.Text.Length == 0))
+                    {
+                        lblErrorMessage.Text = "Please enter value in all the columns";
+                    }
+                    else
+                    {
+                        dr["Id"] = datatable.Rows.Count + 1;
+                        dr["MessageType"] = messagetypeFooter.Text;
+                        dr["ProcessToRun"] = processtorunFooter.Text;
+                        dr["SecurityValue"] = securityvalueFooter.Text;
+                        dr["EngineTypeName"] = enginetypenameFooter.Text;
+
+                        datatable.Rows.Add(dr);
+                        datatable.AcceptChanges();
+                        datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
+                        ClearMsgs();
+                        ShowData();
+                    }
                 }
-                datatable.Rows.Add(dr);
-                datatable.AcceptChanges();
-                datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-                ClearMsgs();
-                ShowData();
             }
         }
         protected void ClearMsgs()
