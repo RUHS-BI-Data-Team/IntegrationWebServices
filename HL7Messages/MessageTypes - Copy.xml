@@ -21,9 +21,9 @@
   </xs:schema>
   <MessageTypes>
     <Id>1</Id>
-    <MessageType>dgdfg</MessageType>
-    <ProcessToRun>rytrty</ProcessToRun>
-    <SecurityValue>rtyrty</SecurityValue>
-    <EngineTypeName>edweew</EngineTypeName>
+    <MessageType>Sample Type1237878</MessageType>
+    <ProcessToRun>Sample Process567</ProcessToRun>
+    <SecurityValue>Sample Security Value</SecurityValue>
+    <EngineTypeName>Sample Engine Type</EngineTypeName>
   </MessageTypes>
 </NewDataSet>

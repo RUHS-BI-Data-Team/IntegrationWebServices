@@ -66,6 +66,11 @@
   <ItemGroup>
     <Content Include="Global.asax" />
     <Content Include="HL7MessageReceiver.asmx" />
+    <Content Include="Images\addnew.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\save.png" />
     <Content Include="Login.aspx" />
     <Content Include="MessageTypes.aspx" />
     <Content Include="Web.config" />
@@ -125,6 +130,7 @@
       <Name>Intgn.Libraries</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

@@ -18,9 +18,16 @@
             </asp:GridView>--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCreated="GridView1_RowCreated" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
 
-OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" ShowFooter="true" OnRowCommand="GridView1_RowCommand">   
+OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" ShowFooter="true" OnRowCommand="GridView1_RowCommand"   
+      BackColor="White" BorderColor="#CCCCCC" BorderWidth="1px" CellPadding="3">
+                <%-- Theme Properties --%>
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <RowStyle ForeColor="#000066" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
             <Columns>   
  
                 <asp:TemplateField HeaderText="ID">   
@@ -73,22 +80,26 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                     </FooterTemplate>
   
                  </asp:TemplateField>  
-                <asp:TemplateField>   
-                    <ItemTemplate>   
-                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" />   
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete"/>   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update"/>   
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel"/>
-                    </EditItemTemplate>  
-                    <FooterStyle HorizontalAlign="Right" /> 
-                        <FooterTemplate>   
-                            <asp:Button ID="btn_Add" runat="server" Text="Add New Row"  CommandName="Add"/>   
-                        </FooterTemplate>                      
-                </asp:TemplateField>   
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Images/delete.png" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/save.png" runat="server" CommandName="Update" ToolTip="Update" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Images/cancel.png" runat="server" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/addnew.png" runat="server" CommandName="AddNew" ToolTip="Add New" Width="20px" Height="20px"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
                 </Columns>   
         </asp:GridView> 
+            <br />
+            <asp:Label ID="lblStatusMessage" Text="" runat="server"/>
+            <br />
+            <asp:Label ID="lblErrorMessage" Text="" ForeColor="Red" runat="server"/>
+
         </div>
     </form>
 </body>
