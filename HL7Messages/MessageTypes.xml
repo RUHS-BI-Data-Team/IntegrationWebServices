@@ -21,8 +21,8 @@
   </xs:schema>
   <MessageTypes>
     <Id>1</Id>
-    <MessageType>Sample Type12378</MessageType>
-    <ProcessToRun>Sample Process</ProcessToRun>
+    <MessageType>Sample Type1237878</MessageType>
+    <ProcessToRun>Sample Process567</ProcessToRun>
     <SecurityValue>Sample Security Value</SecurityValue>
     <EngineTypeName>Sample Engine Type</EngineTypeName>
   </MessageTypes>

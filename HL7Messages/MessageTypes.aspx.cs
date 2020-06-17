@@ -22,7 +22,9 @@ namespace HL7Messages
 
         private void ShowData()
         {
-            GridView1.DataSource = GetMessageTypes().Copy();
+            //Store the DataTable in ViewState
+            DataTable tbl = GetMessageTypes().Copy();
+            GridView1.DataSource = tbl;
             GridView1.DataBind();
         }
             private DataTable GetMessageTypes()
@@ -66,7 +68,30 @@ namespace HL7Messages
             return dt;
         }
 
-       protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+     
+        protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
+        {
+            if (e.Row.RowType == DataControlRowType.DataRow)
+            {
+                DataTable dt = (DataTable)ViewState["CurrentTable"];
+                LinkButton lb = (LinkButton)e.Row.FindControl("LinkButton1");
+                if (lb != null)
+                {
+                    if (dt.Rows.Count > 1)
+                    {
+                        if (e.Row.RowIndex == dt.Rows.Count - 1)
+                        {
+                            lb.Visible = false;
+                        }
+                    }
+                    else
+                    {
+                        lb.Visible = false;
+                    }
+                }
+            }
+        }
+        protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.   
             GridView1.EditIndex = e.NewEditIndex;
@@ -115,6 +140,29 @@ namespace HL7Messages
             datatable.AcceptChanges();
             datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
             ShowData();
+        }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("Add"))
+            {
+                DataTable datatable = GetMessageTypes().Copy();
+
+                DataRow dr = null;
+                dr = datatable.NewRow();
+                if (dr != null)
+                {
+                    dr["Id"] = datatable.Rows.Count + 1;
+                    dr["MessageType"] = (GridView1.FooterRow.FindControl("txt_MessageTypeFooter") as TextBox).Text.Trim();
+                    dr["ProcessToRun"] = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox).Text.Trim();
+                    dr["SecurityValue"] = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox).Text.Trim();
+                    dr["EngineTypeName"] = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox).Text.Trim();
+                }
+                datatable.Rows.Add(dr);
+                datatable.AcceptChanges();
+                datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
+                ShowData();
+            }
         }
     }
 }
