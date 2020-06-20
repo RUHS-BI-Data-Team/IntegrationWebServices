@@ -26,8 +26,9 @@ namespace HL7Messages
             DataTable tbl = GetMessageTypes().Copy();
             GridView1.DataSource = tbl;
             GridView1.DataBind();
+            ClearMsgs();
         }
-            private DataTable GetMessageTypes()
+        private DataTable GetMessageTypes()
         {
             dt = new DataTable("MessageTypes");
             if (File.Exists(Server.MapPath("MessageTypes.xml")) == true){
@@ -38,18 +39,6 @@ namespace HL7Messages
                         GridView1.DataSource = dt;
                         GridView1.DataBind();
                     }
-                    else
-                    {
-                        dt.Rows.Add(dt.NewRow());
-                        GridView1.DataSource = dt;
-                        GridView1.DataBind();
-                        GridView1.Rows[0].Cells.Clear();
-                        GridView1.Rows[0].Cells.Add(new TableCell());
-                        GridView1.Rows[0].Cells[0].ColumnSpan = dt.Columns.Count;
-                        GridView1.Rows[0].Cells[0].Text = "No Data Found ..!";
-                        GridView1.Rows[0].Cells[0].HorizontalAlign = HorizontalAlign.Center;
-                    }
-
                 }
 
             }
@@ -87,36 +76,11 @@ namespace HL7Messages
             dt.Rows.Add(dr1);
             return dt;
         }
-
-     
-        //protected void GridView1_RowCreated(object sender, GridViewRowEventArgs e)
-        //{
-        //    if (e.Row.RowType == DataControlRowType.DataRow)
-        //    {
-        //        DataTable dt = (DataTable)ViewState["CurrentTable"];
-        //        LinkButton lb = (LinkButton)e.Row.FindControl("LinkButton1");
-        //        if (lb != null)
-        //        {
-        //            if (dt.Rows.Count > 1)
-        //            {
-        //                if (e.Row.RowIndex == dt.Rows.Count - 1)
-        //                {
-        //                    lb.Visible = false;
-        //                }
-        //            }
-        //            else
-        //            {
-        //                lb.Visible = false;
-        //            }
-        //        }
-        //        ClearMsgs();
-        //    }
-        //}
+    
         protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.   
             GridView1.EditIndex = e.NewEditIndex;
-            ClearMsgs();
             ShowData();
         }
         protected void GridView1_RowUpdating(object sender, System.Web.UI.WebControls.GridViewUpdateEventArgs e)
@@ -146,7 +110,6 @@ namespace HL7Messages
                 }
                 datatable.AcceptChanges();
                 datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-                ClearMsgs();
                 ShowData();
             }
         }
@@ -154,7 +117,6 @@ namespace HL7Messages
         {
             //Setting the EditIndex property to -1 to cancel the Edit mode in Gridview   
             GridView1.EditIndex = -1;
-            ClearMsgs();
             ShowData();
         }
 
@@ -171,7 +133,6 @@ namespace HL7Messages
                 }
                 datatable.AcceptChanges();
                 datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-                ClearMsgs();
                 ShowData();
             }
             else
@@ -184,17 +145,16 @@ namespace HL7Messages
         {
             if (e.CommandName.Equals("AddNew"))
             {
-                DataTable datatable = GetMessageTypes().Copy();
+                TextBox messagetypeFooter = (TextBox)(GridView1.FooterRow.FindControl("txt_MessageTypeFooter"));
+                TextBox processtorunFooter = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox);
+                TextBox securityvalueFooter = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox);
+                TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
 
+                DataTable datatable = GetMessageTypes().Copy();
                 DataRow dr = null;
                 dr = datatable.NewRow();
                 if (dr != null)
                 {
-
-                    TextBox messagetypeFooter = (GridView1.FooterRow.FindControl("txt_MessageTypeFooter") as TextBox);
-                    TextBox processtorunFooter = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox);
-                    TextBox securityvalueFooter = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox);
-                    TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
                     if ((messagetypeFooter.Text.Length == 0) || (processtorunFooter.Text.Length == 0) || (securityvalueFooter.Text.Length == 0) || (enginetypenameFooter.Text.Length == 0))
                     {
                         lblErrorMessage.Text = "Please enter value in all the columns";
@@ -210,7 +170,6 @@ namespace HL7Messages
                         datatable.Rows.Add(dr);
                         datatable.AcceptChanges();
                         datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-                        ClearMsgs();
                         ShowData();
                     }
                 }
