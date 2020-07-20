@@ -32,7 +32,7 @@ namespace HL7Messages
         DataTable dtTypes = new DataTable("Types");
         [WebMethod]
         [SoapDocumentMethod]
-        public ValidateReturn AddHL7MessageToWarehouse(string MessageType, String Passphrase, String HL7Message)
+        public ValidateReturn AddHL7MessageToWarehouse(string WebServiceType, String Passphrase, String HL7Message)
         {
             
             if (Application["MessageTypes"] is object)
@@ -42,19 +42,22 @@ namespace HL7Messages
             else
             {
                 string xmlTypes = dbf.LoadMessageTypesFromDB(conn, ref TypesErrorMessage);
-                if(xmlTypes == "")
+                if (xmlTypes == "")
                 {
                     r.Validate = TypesErrorMessage;
                     return r;
                 }
-                dtTypes.ReadXml(new StringReader(xmlTypes));
+                else
+                {
+                    Application["MessageTypes"] = xmlTypes;
+                    dtTypes.ReadXml(new StringReader(xmlTypes));
+                }
             }
 
-            switch (GetMessageTypeProcess(MessageType, Passphrase))
+            switch (GetMessageTypeProcess(WebServiceType, Passphrase))
             {
                 case 1: //ADT
                     ADTData d = new ADTData();
-
                     switch (dbf.CheckForExistingADTContreolID(conn, d.GetControlId(HL7Message), ref CheckErrorMessage))
                     {
                         case 0:
@@ -80,11 +83,21 @@ namespace HL7Messages
                             break;
                     }
                     break;
+                case 2: //ORU
+                    break;
             }
             return r;
         }
-        private int GetMessageTypeProcess(string MessageType, String Passphrase) {
-            return 1;
+        private int GetMessageTypeProcess(string WebServiceType, String Passphrase) {
+            int returnValue = 0;
+            foreach(DataRow r in dtTypes.Rows)
+            {
+                if(r["WebServiceType"].ToString() == WebServiceType && r["SecurityValue"].ToString() == Passphrase)
+                {
+                    returnValue = Convert.ToInt32(r["ProcessToRun"].ToString());
+                }
+            }
+            return returnValue;
         }
     }
            

@@ -88,12 +88,12 @@ namespace HL7Messages
                 cm.Parameters.Add(new SqlParameter("@PatientClass", SqlDbType.NVarChar, 10)).Value = ADTMessage.PatientClass;
                 cm.Parameters.Add(new SqlParameter("@PV13", SqlDbType.NVarChar, -1)).Value = ADTMessage.PV13;
                 cm.Parameters.Add(new SqlParameter("@Encounter", SqlDbType.NVarChar, 15)).Value = ADTMessage.Encounter;
-                cm.Parameters.Add(new SqlParameter("@StreetAddress", SqlDbType.NVarChar, 150)).Value = ADTMessage.GeoCodedData.StreetAddress;
-                cm.Parameters.Add(new SqlParameter("@City", SqlDbType.NVarChar, 35)).Value = ADTMessage.GeoCodedData.City;
-                cm.Parameters.Add(new SqlParameter("@State", SqlDbType.NVarChar, 35)).Value = ADTMessage.GeoCodedData.State;
-                cm.Parameters.Add(new SqlParameter("@ZIPCode", SqlDbType.NVarChar, 10)).Value = ADTMessage.GeoCodedData.ZIPCode;
-                cm.Parameters.Add(new SqlParameter("@Easting", SqlDbType.NVarChar, 20)).Value = ADTMessage.GeoCodedData.Easting;
-                cm.Parameters.Add(new SqlParameter("@Northing", SqlDbType.NVarChar, 20)).Value = ADTMessage.GeoCodedData.Northing;
+                //cm.Parameters.Add(new SqlParameter("@StreetAddress", SqlDbType.NVarChar, 150)).Value = ADTMessage.GeoCodedData.StreetAddress;
+                //cm.Parameters.Add(new SqlParameter("@City", SqlDbType.NVarChar, 35)).Value = ADTMessage.GeoCodedData.City;
+                //cm.Parameters.Add(new SqlParameter("@State", SqlDbType.NVarChar, 35)).Value = ADTMessage.GeoCodedData.State;
+                //cm.Parameters.Add(new SqlParameter("@ZIPCode", SqlDbType.NVarChar, 10)).Value = ADTMessage.GeoCodedData.ZIPCode;
+                //cm.Parameters.Add(new SqlParameter("@Easting", SqlDbType.NVarChar, 20)).Value = ADTMessage.GeoCodedData.Easting;
+                //cm.Parameters.Add(new SqlParameter("@Northing", SqlDbType.NVarChar, 20)).Value = ADTMessage.GeoCodedData.Northing;
                 cn.Open();
                 cm.ExecuteNonQuery();
                 cn.Close();

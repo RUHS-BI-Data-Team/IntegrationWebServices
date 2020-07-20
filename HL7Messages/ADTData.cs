@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using GeoCodeAddressUsingRCITWS;
+//using GeoCodeAddressUsingRCITWS;
 using System.Web.Script.Serialization;
 using System.Web.Services;
 
@@ -13,8 +13,8 @@ namespace HL7Messages
 
     public class ADTData
     {
-        GeoCodeResult gcResult = new GeoCodeResult();
-        GeoCodeAddress gcAddress = new GeoCodeAddress();
+        //GeoCodeResult gcResult = new GeoCodeResult();
+        //GeoCodeAddress gcAddress = new GeoCodeAddress();
         HL7Functions frnHL7 = new HL7Functions();
         string hL7Message;
         string controlId; //MSH10
@@ -50,7 +50,7 @@ namespace HL7Messages
         public string PatientClass { get { return patientClass; } set { patientClass = value; } }
         public string PV13 { get { return pV13; } set { pV13 = value; } }
         public string Encounter { get { return encounter; } set { encounter = value; } }
-        public GeoCodeResult GeoCodedData { get { return gcResult; } }
+        //public GeoCodeResult GeoCodedData { get { return gcResult; } }
 
         private void LoadValues()
         {
@@ -63,7 +63,7 @@ namespace HL7Messages
             patientClass = frnHL7.HL7Parser(HL7Message, "PV12", 0);
             pV13 = frnHL7.HL7Parser(HL7Message, "PV13", 0);
             encounter = frnHL7.HL7Parser(HL7Message, "PID18", 0);
-            gcResult = gcAddress.GeoCode(frnHL7.HL7Parser(HL7Message, "PID11.1", 0), frnHL7.HL7Parser(HL7Message, "PID11.3", 0), frnHL7.HL7Parser(HL7Message, "PID11.4", 0), frnHL7.HL7Parser(HL7Message, "PID11.5", 0));
+            //gcResult = gcAddress.GeoCode(frnHL7.HL7Parser(HL7Message, "PID11.1", 0), frnHL7.HL7Parser(HL7Message, "PID11.3", 0), frnHL7.HL7Parser(HL7Message, "PID11.4", 0), frnHL7.HL7Parser(HL7Message, "PID11.5", 0));
         }
         private void ClearValues()
         {
