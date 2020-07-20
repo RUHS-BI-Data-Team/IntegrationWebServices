@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Data;
 using System.Data.SqlClient;
 using Newtonsoft.Json;
+using System.Threading;
 
 namespace GeoCodeAddressUsingRCITWS
 {
@@ -14,7 +15,7 @@ namespace GeoCodeAddressUsingRCITWS
         {
             if (PatientAddrerss.Easting > 100000 && PatientAddrerss.Northing > 100000 && MRN != "" && ControlId != "")
             {
-                SqlConnection cn = new SqlConnection("Data Source=IntegrationDB;Initial Catalog=GIS;Integrated Security=True; timeout= 120");
+                SqlConnection cn = new SqlConnection("Data Source=cpc-intsqlprd01;Initial Catalog=GIS;Integrated Security=True; timeout= 120");
                 SqlCommand cm = new SqlCommand("uspInsertPatientAddressGeom", cn);
                 cm.CommandType = CommandType.StoredProcedure;
                 cm.Parameters.Add(new SqlParameter("@MRN", SqlDbType.NVarChar, 15));
@@ -46,19 +47,52 @@ namespace GeoCodeAddressUsingRCITWS
             string URL = "https://gis.countyofriverside.us/arcgis_public/rest/services/GeocodingService/RiversideGeocoder/GeocodeServer/findAddressCandidates?";
             Uri GeoCodeRequest = new Uri(string.Format(URL + "outFields=*&f=pjson&SingleLine={0}&City={1}&State={2}&Zip={3}&outSR={4}",
             Uri.EscapeDataString(StreetAddress), Uri.EscapeDataString(City), Uri.EscapeDataString(State), Uri.EscapeDataString(ZIPCode), 2230));
-            WebRequest w = WebRequest.Create(GeoCodeRequest);
-            WebResponse r = w.GetResponse();
-            StreamReader sr = new StreamReader(r.GetResponseStream());
-            String ResponseData = sr.ReadToEnd();
-            ArcGISReultsFormat.RootObject jnRoot = JsonConvert.DeserializeObject<ArcGISReultsFormat.RootObject>(ResponseData);
-            List<ArcGISReultsFormat.Candidate> Addresses = jnRoot.candidates;
-            GR.StreetAddress = GetAddress(Addresses);
-            GR.City = GetCity(Addresses);
-            GR.State = GetState(Addresses);
-            GR.ZIPCode = GetZip(Addresses);
-            GR.Easting = GetX(Addresses);
-            GR.Northing = GetY(Addresses);
-            GR.Score = GetScore(Addresses);
+            try
+            {
+                WebRequest w = WebRequest.Create(GeoCodeRequest);
+                WebResponse r = w.GetResponse(); //Add error handling for Server unavailable
+                StreamReader sr = new StreamReader(r.GetResponseStream());
+                String ResponseData = sr.ReadToEnd();
+                ArcGISReultsFormat.RootObject jnRoot = JsonConvert.DeserializeObject<ArcGISReultsFormat.RootObject>(ResponseData);
+                List<ArcGISReultsFormat.Candidate> Addresses = jnRoot.candidates;
+                if (Addresses != null)
+                {
+                    GR.StreetAddress = GetAddress(Addresses);
+                    GR.City = GetCity(Addresses);
+                    GR.State = GetState(Addresses);
+                    GR.ZIPCode = GetZip(Addresses);
+                    GR.Easting = GetX(Addresses);
+                    GR.Northing = GetY(Addresses);
+                    GR.Score = GetScore(Addresses);
+                }
+            }
+            catch (Exception e1)
+            {
+                try
+                {
+                    Thread.Sleep(10000);
+                    WebRequest w = WebRequest.Create(GeoCodeRequest);
+                    WebResponse r = w.GetResponse(); //Add error handling for Server unavailable
+                    StreamReader sr = new StreamReader(r.GetResponseStream());
+                    String ResponseData = sr.ReadToEnd();
+                    ArcGISReultsFormat.RootObject jnRoot = JsonConvert.DeserializeObject<ArcGISReultsFormat.RootObject>(ResponseData);
+                    List<ArcGISReultsFormat.Candidate> Addresses = jnRoot.candidates;
+                    if (Addresses != null)
+                    {
+                        GR.StreetAddress = GetAddress(Addresses);
+                        GR.City = GetCity(Addresses);
+                        GR.State = GetState(Addresses);
+                        GR.ZIPCode = GetZip(Addresses);
+                        GR.Easting = GetX(Addresses);
+                        GR.Northing = GetY(Addresses);
+                        GR.Score = GetScore(Addresses);
+                    }
+                }
+                catch (Exception e2)
+                {
+                    Thread.Sleep(10000);
+                }
+            }       
             return GR;
         }
 
