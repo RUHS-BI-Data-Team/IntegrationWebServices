@@ -18,22 +18,18 @@
             </asp:GridView>--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" CellPadding="6" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
 
-OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting">   
+OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" ShowFooter="true" OnRowCommand="GridView1_RowCommand"   
+      BackColor="White" BorderColor="#CCCCCC" BorderWidth="1px" CellPadding="3">
+                <%-- Theme Properties --%>
+                <FooterStyle BackColor="White" ForeColor="#000066" />
+                <HeaderStyle BackColor="#006699" Font-Bold="True" ForeColor="White" />
+                <PagerStyle BackColor="White" ForeColor="#000066" HorizontalAlign="Left" />
+                <RowStyle ForeColor="#000066" />
+                <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
             <Columns>   
-                <asp:TemplateField>   
-                    <ItemTemplate>   
-                        <asp:Button ID="btn_Edit" runat="server" Text="Edit" CommandName="Edit" />   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:Button ID="btn_Update" runat="server" Text="Update" CommandName="Update"/>   
-                        <asp:Button ID="btn_Cancel" runat="server" Text="Cancel" CommandName="Cancel"/>
-                        <asp:Button ID="btn_Delete" runat="server" Text="Delete" CommandName="Delete"/>   
-                    </EditItemTemplate>   
-                </asp:TemplateField>   
-<%--                <asp:CommandField ShowEditButton="true" />  
-                <asp:CommandField ShowDeleteButton="true" />--%>
+ 
                 <asp:TemplateField HeaderText="ID">   
                     <ItemTemplate>   
                         <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>   
@@ -45,7 +41,10 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                     </ItemTemplate>   
                     <EditItemTemplate>   
                         <asp:TextBox ID="txt_MessageType" runat="server" Text='<%#Eval("MessageType") %>'></asp:TextBox>   
-                    </EditItemTemplate>   
+                    </EditItemTemplate>  
+                    <FooterTemplate>
+                        <asp:TextBox ID="txt_MessageTypeFooter" runat="server"></asp:TextBox>   
+                    </FooterTemplate>
                 </asp:TemplateField>   
                 <asp:TemplateField HeaderText="ProcessToRun">   
                     <ItemTemplate>   
@@ -54,25 +53,53 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                     <EditItemTemplate>   
                         <asp:TextBox ID="txt_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:TextBox>   
                     </EditItemTemplate>   
+                    <FooterTemplate>
+                        <asp:TextBox ID="txt_ProcessToRunFooter" runat="server"></asp:TextBox>   
+                    </FooterTemplate>
                 </asp:TemplateField>   
-             <asp:TemplateField HeaderText="SecurityValue">   
-                    <ItemTemplate>   
-                        <asp:Label ID="lbl_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:Label>   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:TextBox ID="txt_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:TextBox>   
-                    </EditItemTemplate>   
-                </asp:TemplateField>  
-             <asp:TemplateField HeaderText="EngineTypeName">   
-                    <ItemTemplate>   
-                        <asp:Label ID="lbl_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:Label>   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:TextBox ID="txt_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:TextBox>   
-                    </EditItemTemplate>   
-                </asp:TemplateField>                   
-            </Columns>   
+                 <asp:TemplateField HeaderText="SecurityValue">   
+                        <ItemTemplate>   
+                            <asp:Label ID="lbl_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:Label>   
+                        </ItemTemplate>   
+                        <EditItemTemplate>   
+                            <asp:TextBox ID="txt_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:TextBox>   
+                        </EditItemTemplate>   
+                    <FooterTemplate>
+                            <asp:TextBox ID="txt_SecurityValueFooter" runat="server"></asp:TextBox>   
+                    </FooterTemplate>
+                    </asp:TemplateField>  
+                 <asp:TemplateField HeaderText="EngineTypeName">   
+                        <ItemTemplate>   
+                            <asp:Label ID="lbl_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:Label>   
+                        </ItemTemplate>   
+                        <EditItemTemplate>   
+                            <asp:TextBox ID="txt_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:TextBox>   
+                        </EditItemTemplate> 
+                    <FooterTemplate>
+                            <asp:TextBox ID="txt_EngineTypeNameFooter" runat="server"></asp:TextBox>   
+                    </FooterTemplate>
+  
+                 </asp:TemplateField>  
+                    <asp:TemplateField>
+                        <ItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Images/delete.png" runat="server" CommandName="Delete" ToolTip="Delete" Width="20px" Height="20px"/>
+                        </ItemTemplate>
+                        <EditItemTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/save.png" runat="server" CommandName="Update" ToolTip="Update" Width="20px" Height="20px"/>
+                            <asp:ImageButton ImageUrl="~/Images/cancel.png" runat="server" CommandName="Cancel" ToolTip="Cancel" Width="20px" Height="20px"/>
+                        </EditItemTemplate>
+                        <FooterTemplate>
+                            <asp:ImageButton ImageUrl="~/Images/addnew.png" runat="server" CommandName="AddNew" ToolTip="Add New" Width="20px" Height="20px"/>
+                        </FooterTemplate>
+                    </asp:TemplateField>
+                </Columns>   
         </asp:GridView> 
+            <br />
+            <asp:Label ID="lblStatusMessage" Text="" runat="server"/>
+            <br />
+            <asp:Label ID="lblErrorMessage" Text="" ForeColor="Red" runat="server"/>
+
         </div>
     </form>
 </body>

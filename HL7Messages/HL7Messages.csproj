@@ -64,7 +64,14 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Global.asax" />
     <Content Include="HL7MessageReceiver.asmx" />
+    <Content Include="Images\addnew.png" />
+    <Content Include="Images\cancel.png" />
+    <Content Include="Images\delete.png" />
+    <Content Include="Images\edit.png" />
+    <Content Include="Images\save.png" />
+    <Content Include="Login.aspx" />
     <Content Include="MessageTypes.aspx" />
     <Content Include="Web.config" />
   </ItemGroup>
@@ -74,10 +81,20 @@
     <Compile Include="DBFunctions.cs" />
     <Compile Include="GeoCode.cs" />
     <Compile Include="GeoCodeResult.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
     <Compile Include="HL7Functions.cs" />
     <Compile Include="HL7MessageReceiver.asmx.cs">
       <DependentUpon>HL7MessageReceiver.asmx</DependentUpon>
       <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Login.aspx.designer.cs">
+      <DependentUpon>Login.aspx</DependentUpon>
     </Compile>
     <Compile Include="MessageTypes.aspx.cs">
       <DependentUpon>MessageTypes.aspx</DependentUpon>
@@ -108,7 +125,12 @@
       <Name>HL7ParseAndScub</Name>
       <EmbedInteropTypes>False</EmbedInteropTypes>
     </ProjectReference>
+    <ProjectReference Include="..\..\Libraries\Intgn.Libraries\Intgn.Libraries.csproj">
+      <Project>{a3b9274d-2262-4544-bd99-cb1ebdef9c7a}</Project>
+      <Name>Intgn.Libraries</Name>
+    </ProjectReference>
   </ItemGroup>
+  <ItemGroup />
   <PropertyGroup>
     <VisualStudioVersion Condition="'$(VisualStudioVersion)' == ''">10.0</VisualStudioVersion>
     <VSToolsPath Condition="'$(VSToolsPath)' == ''">$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v$(VisualStudioVersion)</VSToolsPath>

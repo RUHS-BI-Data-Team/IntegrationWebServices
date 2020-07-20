@@ -22,14 +22,25 @@ namespace HL7Messages
 
         private void ShowData()
         {
-            GridView1.DataSource = GetMessageTypes().Copy();
+            //Store the DataTable in ViewState
+            DataTable tbl = GetMessageTypes().Copy();
+            GridView1.DataSource = tbl;
             GridView1.DataBind();
+            ClearMsgs();
         }
-            private DataTable GetMessageTypes()
+        private DataTable GetMessageTypes()
         {
             dt = new DataTable("MessageTypes");
             if (File.Exists(Server.MapPath("MessageTypes.xml")) == true){
-                dt.ReadXml(Server.MapPath("MessageTypes.xml"));
+                {
+                    dt.ReadXml(Server.MapPath("MessageTypes.xml"));
+                    if (dt.Rows.Count > 0)
+                    {
+                        GridView1.DataSource = dt;
+                        GridView1.DataBind();
+                    }
+                }
+
             }
             else
             {
@@ -65,8 +76,8 @@ namespace HL7Messages
             dt.Rows.Add(dr1);
             return dt;
         }
-
-       protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
+    
+        protected void GridView1_RowEditing(object sender, System.Web.UI.WebControls.GridViewEditEventArgs e)
         {
             //NewEditIndex property used to determine the index of the row being edited.   
             GridView1.EditIndex = e.NewEditIndex;
@@ -80,21 +91,27 @@ namespace HL7Messages
             TextBox processtorun = GridView1.Rows[e.RowIndex].FindControl("txt_ProcessToRun") as TextBox;
             TextBox securityvalue = GridView1.Rows[e.RowIndex].FindControl("txt_SecurityValue") as TextBox;
             TextBox enginetypename = GridView1.Rows[e.RowIndex].FindControl("txt_EngineTypeName") as TextBox;
-            
-            GridView1.EditIndex = -1;
 
-            DataTable datatable = GetMessageTypes().Copy();
-            DataRow dr = datatable.Select("Id=" + id.Text).FirstOrDefault(); 
-            if (dr != null)
+            if ((messagetype.Text.Length == 0) || (processtorun.Text.Length == 0) || (securityvalue.Text.Length == 0) || (enginetypename.Text.Length == 0))
             {
-                dr["MessageType"] = messagetype.Text;
-                dr["ProcessToRun"] = processtorun.Text;
-                dr["SecurityValue"] = securityvalue.Text;
-                dr["EngineTypeName"] = enginetypename.Text;
+                lblErrorMessage.Text = "Please enter value in all the columns";
             }
-            datatable.AcceptChanges();
-            datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-            ShowData();
+            else
+            {
+                GridView1.EditIndex = -1;
+                DataTable datatable = GetMessageTypes().Copy();
+                DataRow dr = datatable.Select("Id=" + id.Text).FirstOrDefault();
+                if (dr != null)
+                {
+                    dr["MessageType"] = messagetype.Text;
+                    dr["ProcessToRun"] = processtorun.Text;
+                    dr["SecurityValue"] = securityvalue.Text;
+                    dr["EngineTypeName"] = enginetypename.Text;
+                }
+                datatable.AcceptChanges();
+                datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
+                ShowData();
+            }
         }
         protected void GridView1_RowCancelingEdit(object sender, System.Web.UI.WebControls.GridViewCancelEditEventArgs e)
         {
@@ -107,14 +124,61 @@ namespace HL7Messages
         {
             Label lbldeleteid = GridView1.Rows[e.RowIndex].FindControl("lbl_Id") as Label;
             DataTable datatable = GetMessageTypes().Copy();
-            DataRow dr = datatable.Select("Id=" + lbldeleteid.Text).FirstOrDefault(); // finds all rows with id==2 and selects first or null if haven't found any
-            if (dr != null)
+            if (datatable.Rows.Count > 1)
             {
-                dr.Delete();
+                DataRow dr = datatable.Select("Id=" + lbldeleteid.Text).FirstOrDefault(); // finds all rows with id==2 and selects first or null if haven't found any
+                if (dr != null)
+                {
+                    dr.Delete();
+                }
+                datatable.AcceptChanges();
+                datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
+                ShowData();
             }
-            datatable.AcceptChanges();
-            datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
-            ShowData();
+            else
+            {
+                    lblStatusMessage.Text = "There needs to be at least one row in the table";
+            }
         }
+
+        protected void GridView1_RowCommand(object sender, GridViewCommandEventArgs e)
+        {
+            if (e.CommandName.Equals("AddNew"))
+            {
+                TextBox messagetypeFooter = (TextBox)(GridView1.FooterRow.FindControl("txt_MessageTypeFooter"));
+                TextBox processtorunFooter = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox);
+                TextBox securityvalueFooter = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox);
+                TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
+
+                DataTable datatable = GetMessageTypes().Copy();
+                DataRow dr = null;
+                dr = datatable.NewRow();
+                if (dr != null)
+                {
+                    if ((messagetypeFooter.Text.Length == 0) || (processtorunFooter.Text.Length == 0) || (securityvalueFooter.Text.Length == 0) || (enginetypenameFooter.Text.Length == 0))
+                    {
+                        lblErrorMessage.Text = "Please enter value in all the columns";
+                    }
+                    else
+                    {
+                        dr["Id"] = datatable.Rows.Count + 1;
+                        dr["MessageType"] = messagetypeFooter.Text;
+                        dr["ProcessToRun"] = processtorunFooter.Text;
+                        dr["SecurityValue"] = securityvalueFooter.Text;
+                        dr["EngineTypeName"] = enginetypenameFooter.Text;
+
+                        datatable.Rows.Add(dr);
+                        datatable.AcceptChanges();
+                        datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
+                        ShowData();
+                    }
+                }
+            }
+        }
+        protected void ClearMsgs()
+        {
+            lblStatusMessage.Text = "";
+            lblErrorMessage.Text = "";
+         }
     }
 }
