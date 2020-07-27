@@ -67,6 +67,7 @@
     <Reference Include="System.EnterpriseServices" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="DoNotHaveAccess.aspx" />
     <Content Include="Global.asax" />
     <Content Include="HL7MessageReceiver.asmx" />
     <Content Include="Images\addnew.png" />
@@ -82,6 +83,13 @@
     <Compile Include="ADTData.cs" />
     <Compile Include="ArcGISReultsFormat.cs" />
     <Compile Include="DBFunctions.cs" />
+    <Compile Include="DoNotHaveAccess.aspx.cs">
+      <DependentUpon>DoNotHaveAccess.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="DoNotHaveAccess.aspx.designer.cs">
+      <DependentUpon>DoNotHaveAccess.aspx</DependentUpon>
+    </Compile>
     <Compile Include="GeoCode.cs" />
     <Compile Include="GeoCodeResult.cs" />
     <Compile Include="Global.asax.cs">

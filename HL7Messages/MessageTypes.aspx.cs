@@ -14,9 +14,31 @@ namespace HL7Messages
         DataTable dt;
         protected void Page_Load(object sender, EventArgs e)
         {
-            if (!(Page.IsPostBack))
+            Intgn.Libraries.Security.UserAccount usr = (Intgn.Libraries.Security.UserAccount)(User.Identity);
+
+            //if (!((usr.Roles.Contains(System.Web.Configuration.WebConfigurationManager.AppSettings["grpIntegrationAdmin"].ToString()))))
+            String grp = System.Web.Configuration.WebConfigurationManager.AppSettings["grpIntegrationAdmin"].ToString();
+            Boolean flag = false;
+            string[] role = usr.Roles.Split(',');
+            for (int i = 0; i < role.Length; i++)
             {
-                ShowData();
+               string[] words = role[i].Split('=');
+                if (words[1] == grp)
+                {
+                    flag = true;
+                    break;
+                }
+            }
+            if (flag)
+            {
+                if (!(Page.IsPostBack))
+                {
+                    ShowData();
+                }
+            }
+            else
+            {
+                Response.Redirect("DoNotHaveAccess.aspx");
             }
         }
 
