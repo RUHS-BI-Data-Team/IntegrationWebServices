@@ -46,18 +46,7 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                         <asp:TextBox ID="txt_MessageTypeFooter" runat="server"></asp:TextBox>   
                     </FooterTemplate>
                 </asp:TemplateField>   
-                <asp:TemplateField HeaderText="ProcessToRun">   
-                    <ItemTemplate>   
-                        <asp:Label ID="lbl_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:Label>   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:TextBox ID="txt_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:TextBox>   
-                    </EditItemTemplate>   
-                    <FooterTemplate>
-                        <asp:TextBox ID="txt_ProcessToRunFooter" runat="server"></asp:TextBox>   
-                    </FooterTemplate>
-                </asp:TemplateField>   
-                 <asp:TemplateField HeaderText="SecurityValue">   
+                <asp:TemplateField HeaderText="SecurityValue">   
                         <ItemTemplate>   
                             <asp:Label ID="lbl_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:Label>   
                         </ItemTemplate>   
@@ -68,18 +57,6 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                             <asp:TextBox ID="txt_SecurityValueFooter" runat="server"></asp:TextBox>   
                     </FooterTemplate>
                     </asp:TemplateField>  
-                 <asp:TemplateField HeaderText="EngineTypeName">   
-                        <ItemTemplate>   
-                            <asp:Label ID="lbl_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:Label>   
-                        </ItemTemplate>   
-                        <EditItemTemplate>   
-                            <asp:TextBox ID="txt_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:TextBox>   
-                        </EditItemTemplate> 
-                    <FooterTemplate>
-                            <asp:TextBox ID="txt_EngineTypeNameFooter" runat="server"></asp:TextBox>   
-                    </FooterTemplate>
-  
-                 </asp:TemplateField>  
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ImageUrl="~/Images/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>
