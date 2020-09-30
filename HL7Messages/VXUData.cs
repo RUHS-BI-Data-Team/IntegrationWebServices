@@ -2,19 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-//using GeoCodeAddressUsingRCITWS;
-using System.Web.Script.Serialization;
-using System.Web.Services;
 
 namespace HL7Messages
 {
-   
-   
-
-    public class ADTData
+    public class VXUData
     {
-        //GeoCodeResult gcResult = new GeoCodeResult();
-        //GeoCodeAddress gcAddress = new GeoCodeAddress();
         HL7Functions frnHL7 = new HL7Functions();
         string hL7Message;
         string controlId; //MSH10
@@ -23,23 +15,23 @@ namespace HL7Messages
         string mRN; //= dbo.ufnSelectMRNFromHL7Message(@Message)
         string hL7Event; //= dbo.ufnParseHL7Value(@Message, 'MSH9.2', 1)
         string sendingFacility; // = dbo.ufnParseHL7Value(@Message, 'MSH4', 1)
-        string patientClass; // = dbo.ufnParseHL7Value(@Message, 'PV12', 1)
-        string pV13; //= dbo.ufnParseHL7Value(@Message, 'PV13', 0)
-        string encounter;// = dbo.ufnParseHL7Value(@Message, 'PID18', 1)
-       
-        public ADTData() { }
+        string administeredCodeId; //  = dbo.ufnParseHL7Value(@Message, 'RXA5.1', 1)
+        string administeredCodeText; // = dbo.ufnParseHL7Value(@Message, 'RXA5.2', 1)
+        DateTime? administrationDateTime; // = dbo.ufnParseHL7Value(@Message, 'RXA3', 1)
+        string orderNumber; // = dbo.ufnParseHL7Value(@Message, 'ORC2.1', 1)
+        string orderingProviderId; // = dbo.ufnParseHL7Value(@Message, 'ORC12.1', 1)
+        string site; // = dbo.ufnParseHL7Value(@Message, 'RXR2', 1)
 
-        public string GetControlId(string HL7Message)
-        {
-            return controlId = frnHL7.HL7Parser(HL7Message, "MSH10", 0);
-        }
-        public ADTData(string HL7Message)
+        public VXUData() { }
+
+        public VXUData(string HL7Message)
         {
             ClearValues();
             hL7Message = HL7Message;
             LoadValues();
-
         }
+
+
         public string HL7Message { get { return hL7Message; } set { hL7Message = value; LoadValues(); } }
         public string ControlId { get { return controlId; } set { controlId = value; } }
         public string SendingApplication { get { return sendingApplication; } set { sendingApplication = value; } }
@@ -47,10 +39,14 @@ namespace HL7Messages
         public string MRN { get { return mRN; } set { mRN = value; } }
         public string HL7Event { get { return hL7Event; } set { hL7Event = value; } }
         public string SendingFacility { get { return sendingFacility; } set { sendingFacility = value; } }
-        public string PatientClass { get { return patientClass; } set { patientClass = value; } }
-        public string PV13 { get { return pV13; } set { pV13 = value; } }
-        public string Encounter { get { return encounter; } set { encounter = value; } }
-        //public GeoCodeResult GeoCodedData { get { return gcResult; } }
+        public string AdministeredCodeId { get { return administeredCodeId; } set { administeredCodeId = value; } }
+        public string AdministeredCodeText { get { return administeredCodeText; } set { administeredCodeText = value; } }
+        public DateTime? AdministrationDateTime { get { return administrationDateTime; } set { administrationDateTime = value; } }
+        public string OrderNumber { get { return orderNumber; } set { orderNumber = value; } }
+        public string OrderingProviderId { get { return orderingProviderId; } set { orderingProviderId = value; } }
+        public string Site { get { return site; } set { site = value; } }
+
+
 
         private void LoadValues()
         {
@@ -60,11 +56,15 @@ namespace HL7Messages
             mRN = frnHL7.FindPaserLocation(hL7Message, "PID3.1", "MRN", "PID3.4");
             hL7Event = frnHL7.HL7Parser(hL7Message, "MSH9.2", 0);
             sendingFacility = frnHL7.HL7Parser(hL7Message, "MSH4", 0);
-            patientClass = frnHL7.HL7Parser(hL7Message, "PV12", 0);
-            pV13 = frnHL7.HL7Parser(hL7Message, "PV13", 0);
-            encounter = frnHL7.HL7Parser(hL7Message, "PID18", 0);
-            //gcResult = gcAddress.GeoCode(frnHL7.HL7Parser(HL7Message, "PID11.1", 0), frnHL7.HL7Parser(HL7Message, "PID11.3", 0), frnHL7.HL7Parser(HL7Message, "PID11.4", 0), frnHL7.HL7Parser(HL7Message, "PID11.5", 0));
+            administeredCodeId = frnHL7.HL7Parser(hL7Message, "RXA5.1", 1);
+            administeredCodeText = frnHL7.HL7Parser(hL7Message, "RXA5.2", 1);
+            administrationDateTime = frnHL7.ConvertHL7Date2SystemDate(frnHL7.HL7Parser(hL7Message, "RXA3", 1));
+            orderNumber = frnHL7.HL7Parser(hL7Message, "ORC2.1", 1);
+            orderingProviderId = frnHL7.HL7Parser(hL7Message, "ORC12.1", 1);
+            site = frnHL7.HL7Parser(hL7Message, "RXR2", 1);
+
         }
+
         private void ClearValues()
         {
             hL7Message = "";
@@ -74,10 +74,12 @@ namespace HL7Messages
             mRN = "";
             hL7Event = "";
             sendingFacility = "";
-            patientClass = "";
-            pV13 = "";
-            encounter = "";
+            AdministeredCodeId = "";
+            AdministeredCodeText = "";
+            AdministrationDateTime = null;
+            OrderNumber = "";
+            OrderingProviderId = "";
+            Site = "";
         }
-
     }
 }

@@ -9,9 +9,8 @@
               <xs:sequence>
                 <xs:element name="Id" msdata:AutoIncrement="true" msdata:AutoIncrementSeed="1" type="xs:short" minOccurs="0" />
                 <xs:element name="MessageType" type="xs:string" minOccurs="0" />
-                <xs:element name="ProcessToRun" type="xs:string" minOccurs="0" />
+                <xs:element name="ProcessToRun" type="xs:int" minOccurs="0" />
                 <xs:element name="SecurityValue" type="xs:string" minOccurs="0" />
-                <xs:element name="EngineTypeName" type="xs:string" minOccurs="0" />
               </xs:sequence>
             </xs:complexType>
           </xs:element>
@@ -21,16 +20,20 @@
   </xs:schema>
   <MessageTypes>
     <Id>1</Id>
-    <MessageType>ADTfromEpic</MessageType>
-    <ProcessToRun>ADT</ProcessToRun>
-    <SecurityValue>malamahitaahe</SecurityValue>
-    <EngineTypeName>openlink</EngineTypeName>
+    <MessageType>ADTFromEpic</MessageType>
+    <ProcessToRun>1</ProcessToRun>
+    <SecurityValue>mmmmmtttllee</SecurityValue>
   </MessageTypes>
   <MessageTypes>
     <Id>2</Id>
     <MessageType>ORUFromNovius</MessageType>
-    <ProcessToRun>ORU</ProcessToRun>
-    <SecurityValue>khoopchan</SecurityValue>
-    <EngineTypeName>openlink</EngineTypeName>
+    <ProcessToRun>2</ProcessToRun>
+    <SecurityValue>kkllsserrtff</SecurityValue>
+  </MessageTypes>
+  <MessageTypes>
+    <Id>3</Id>
+    <MessageType>ORUFromStarlims</MessageType>
+    <ProcessToRun>2</ProcessToRun>
+    <SecurityValue>kkllsserrtff</SecurityValue>
   </MessageTypes>
 </NewDataSet>

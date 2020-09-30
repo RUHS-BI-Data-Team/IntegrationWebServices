@@ -18,9 +18,9 @@
             </asp:GridView>--%>
 
 
-        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="true" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
+        <asp:GridView ID="GridView1" runat="server" AutoGenerateColumns="False" ShowHeaderWhenEmpty="True" OnRowCancelingEdit="GridView1_RowCancelingEdit"    
 
-OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" ShowFooter="true" OnRowCommand="GridView1_RowCommand"   
+OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowDeleting="GridView1_RowDeleting" ShowFooter="True" OnRowCommand="GridView1_RowCommand"   
       BackColor="White" BorderColor="#CCCCCC" BorderWidth="1px" CellPadding="3">
                 <%-- Theme Properties --%>
                 <FooterStyle BackColor="White" ForeColor="#000066" />
@@ -30,7 +30,7 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                 <SelectedRowStyle BackColor="#669999" Font-Bold="True" ForeColor="White" />
             <Columns>   
  
-                <asp:TemplateField HeaderText="ID">   
+                <asp:TemplateField HeaderText="ID" Visible="False">   
                     <ItemTemplate>   
                         <asp:Label ID="lbl_ID" runat="server" Text='<%#Eval("Id") %>'></asp:Label>   
                     </ItemTemplate>   
@@ -46,17 +46,6 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                         <asp:TextBox ID="txt_MessageTypeFooter" runat="server"></asp:TextBox>   
                     </FooterTemplate>
                 </asp:TemplateField>   
-                <asp:TemplateField HeaderText="ProcessToRun">   
-                    <ItemTemplate>   
-                        <asp:Label ID="lbl_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:Label>   
-                    </ItemTemplate>   
-                    <EditItemTemplate>   
-                        <asp:TextBox ID="txt_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:TextBox>   
-                    </EditItemTemplate>   
-                    <FooterTemplate>
-                        <asp:TextBox ID="txt_ProcessToRunFooter" runat="server"></asp:TextBox>   
-                    </FooterTemplate>
-                </asp:TemplateField>   
                  <asp:TemplateField HeaderText="SecurityValue">   
                         <ItemTemplate>   
                             <asp:Label ID="lbl_SecurityValue" runat="server" Text='<%#Eval("SecurityValue") %>'></asp:Label>   
@@ -68,18 +57,17 @@ OnRowEditing="GridView1_RowEditing" OnRowUpdating="GridView1_RowUpdating" OnRowD
                             <asp:TextBox ID="txt_SecurityValueFooter" runat="server"></asp:TextBox>   
                     </FooterTemplate>
                     </asp:TemplateField>  
-                 <asp:TemplateField HeaderText="EngineTypeName">   
-                        <ItemTemplate>   
-                            <asp:Label ID="lbl_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:Label>   
-                        </ItemTemplate>   
-                        <EditItemTemplate>   
-                            <asp:TextBox ID="txt_EngineTypeName" runat="server" Text='<%#Eval("EngineTypeName") %>'></asp:TextBox>   
-                        </EditItemTemplate> 
+                <asp:TemplateField HeaderText="ProcessToRun" ConvertEmptyStringToNull="False">   
+                    <ItemTemplate>   
+                        <asp:Label ID="lbl_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:Label>   
+                    </ItemTemplate>   
+                    <EditItemTemplate>   
+                        <asp:TextBox ID="txt_ProcessToRun" runat="server" Text='<%#Eval("ProcessToRun") %>'></asp:TextBox>   
+                    </EditItemTemplate>   
                     <FooterTemplate>
-                            <asp:TextBox ID="txt_EngineTypeNameFooter" runat="server"></asp:TextBox>   
+                        <asp:TextBox ID="txt_ProcessToRunFooter" runat="server"></asp:TextBox>   
                     </FooterTemplate>
-  
-                 </asp:TemplateField>  
+                </asp:TemplateField>   
                     <asp:TemplateField>
                         <ItemTemplate>
                             <asp:ImageButton ImageUrl="~/Images/edit.png" runat="server" CommandName="Edit" ToolTip="Edit" Width="20px" Height="20px"/>

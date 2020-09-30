@@ -32,9 +32,11 @@
             this.btnOpenFile = new System.Windows.Forms.Button();
             this.txtTime = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
-            this.txtStartDate = new System.Windows.Forms.DateTimePicker();
-            this.txtAmountDays = new System.Windows.Forms.NumericUpDown();
-            ((System.ComponentModel.ISupportInitialize)(this.txtAmountDays)).BeginInit();
+            this.txtEndDate = new System.Windows.Forms.TextBox();
+            this.txtStartDate = new System.Windows.Forms.TextBox();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label3 = new System.Windows.Forms.Label();
+            this.txtAmountDays = new System.Windows.Forms.TextBox();
             this.SuspendLayout();
             // 
             // OpenXMLFile
@@ -69,35 +71,47 @@
             this.label1.TabIndex = 5;
             this.label1.Text = "Time";
             // 
+            // txtEndDate
+            // 
+            this.txtEndDate.Location = new System.Drawing.Point(112, 38);
+            this.txtEndDate.Name = "txtEndDate";
+            this.txtEndDate.ReadOnly = true;
+            this.txtEndDate.Size = new System.Drawing.Size(147, 20);
+            this.txtEndDate.TabIndex = 9;
+            // 
             // txtStartDate
             // 
-            this.txtStartDate.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.txtStartDate.Location = new System.Drawing.Point(13, 102);
+            this.txtStartDate.Location = new System.Drawing.Point(112, 12);
             this.txtStartDate.Name = "txtStartDate";
-            this.txtStartDate.Size = new System.Drawing.Size(94, 20);
-            this.txtStartDate.TabIndex = 7;
+            this.txtStartDate.ReadOnly = true;
+            this.txtStartDate.Size = new System.Drawing.Size(147, 20);
+            this.txtStartDate.TabIndex = 10;
+            // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(4, 18);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(102, 13);
+            this.label2.TabIndex = 11;
+            this.label2.Text = "Start Date and Time";
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(4, 41);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(99, 13);
+            this.label3.TabIndex = 12;
+            this.label3.Text = "End Date and Time";
             // 
             // txtAmountDays
             // 
-            this.txtAmountDays.Location = new System.Drawing.Point(125, 102);
-            this.txtAmountDays.Maximum = new decimal(new int[] {
-            1000,
-            0,
-            0,
-            0});
-            this.txtAmountDays.Minimum = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.txtAmountDays.Location = new System.Drawing.Point(112, 62);
             this.txtAmountDays.Name = "txtAmountDays";
-            this.txtAmountDays.Size = new System.Drawing.Size(53, 20);
-            this.txtAmountDays.TabIndex = 8;
-            this.txtAmountDays.Value = new decimal(new int[] {
-            1,
-            0,
-            0,
-            0});
+            this.txtAmountDays.ReadOnly = true;
+            this.txtAmountDays.Size = new System.Drawing.Size(63, 20);
+            this.txtAmountDays.TabIndex = 13;
             // 
             // Form1
             // 
@@ -105,14 +119,16 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(384, 214);
             this.Controls.Add(this.txtAmountDays);
+            this.Controls.Add(this.label3);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.txtStartDate);
+            this.Controls.Add(this.txtEndDate);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.txtTime);
             this.Controls.Add(this.btnOpenFile);
             this.Name = "Form1";
             this.Text = "Form1";
             this.Load += new System.EventHandler(this.Form1_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.txtAmountDays)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -123,8 +139,11 @@
         private System.Windows.Forms.Button btnOpenFile;
         private System.Windows.Forms.TextBox txtTime;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DateTimePicker txtStartDate;
-        private System.Windows.Forms.NumericUpDown txtAmountDays;
+        private System.Windows.Forms.TextBox txtEndDate;
+        private System.Windows.Forms.TextBox txtStartDate;
+        private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Label label3;
+        private System.Windows.Forms.TextBox txtAmountDays;
     }
 }
 

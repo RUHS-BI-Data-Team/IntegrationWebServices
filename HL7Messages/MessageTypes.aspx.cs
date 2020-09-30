@@ -54,25 +54,25 @@ namespace HL7Messages
             dt = new DataTable("MessageTypes");
             dt.Columns.Add(new DataColumn("Id", typeof(Int16)));
             dt.Columns.Add(new DataColumn("MessageType", typeof(String)));
-            dt.Columns.Add(new DataColumn("ProcessToRun", typeof(String)));
+            dt.Columns.Add(new DataColumn("ProcessToRun", typeof(Int32)));
             dt.Columns.Add(new DataColumn("SecurityValue", typeof(String)));
-            dt.Columns.Add(new DataColumn("EngineTypeName", typeof(String)));
+            //dt.Columns.Add(new DataColumn("EngineTypeName", typeof(String)));
             dt.Columns["Id"].AutoIncrement = true;
             dt.Columns["Id"].AutoIncrementStep = 1;
             dt.Columns["Id"].AutoIncrementSeed = 1;
 
             DataRow dr = dt.NewRow();
             dr["MessageType"] = "Sample Type";
-            dr["ProcessToRun"] = "Sample Process";
+            dr["ProcessToRun"] = 1;
             dr["SecurityValue"] = "Sample Security Value";
-            dr["EngineTypeName"] = "Sample Engine Type";
+            //dr["EngineTypeName"] = "Sample Engine Type";
             dt.Rows.Add(dr);
 
             DataRow dr1 = dt.NewRow();
             dr1["MessageType"] = "Sample Type1";
-            dr1["ProcessToRun"] = "Sample Process1";
+            dr1["ProcessToRun"] = 2;
             dr1["SecurityValue"] = "Sample Security Value1";
-            dr1["EngineTypeName"] = "Sample Engine Type1";
+            //dr1["EngineTypeName"] = "Sample Engine Type1";
             dt.Rows.Add(dr1);
             return dt;
         }
@@ -90,9 +90,9 @@ namespace HL7Messages
             TextBox messagetype = GridView1.Rows[e.RowIndex].FindControl("txt_MessageType") as TextBox;
             TextBox processtorun = GridView1.Rows[e.RowIndex].FindControl("txt_ProcessToRun") as TextBox;
             TextBox securityvalue = GridView1.Rows[e.RowIndex].FindControl("txt_SecurityValue") as TextBox;
-            TextBox enginetypename = GridView1.Rows[e.RowIndex].FindControl("txt_EngineTypeName") as TextBox;
+            //TextBox enginetypename = GridView1.Rows[e.RowIndex].FindControl("txt_EngineTypeName") as TextBox;
 
-            if ((messagetype.Text.Length == 0) || (processtorun.Text.Length == 0) || (securityvalue.Text.Length == 0) || (enginetypename.Text.Length == 0))
+            if ((messagetype.Text.Length == 0) || (processtorun.Text.Length == 0) || (securityvalue.Text.Length == 0))// || (enginetypename.Text.Length == 0))
             {
                 lblErrorMessage.Text = "Please enter value in all the columns";
             }
@@ -106,7 +106,7 @@ namespace HL7Messages
                     dr["MessageType"] = messagetype.Text;
                     dr["ProcessToRun"] = processtorun.Text;
                     dr["SecurityValue"] = securityvalue.Text;
-                    dr["EngineTypeName"] = enginetypename.Text;
+                    //dr["EngineTypeName"] = enginetypename.Text;
                 }
                 datatable.AcceptChanges();
                 datatable.WriteXml(Server.MapPath("MessageTypes.xml"), XmlWriteMode.WriteSchema);
@@ -148,14 +148,14 @@ namespace HL7Messages
                 TextBox messagetypeFooter = (TextBox)(GridView1.FooterRow.FindControl("txt_MessageTypeFooter"));
                 TextBox processtorunFooter = (GridView1.FooterRow.FindControl("txt_ProcessToRunFooter") as TextBox);
                 TextBox securityvalueFooter = (GridView1.FooterRow.FindControl("txt_SecurityValueFooter") as TextBox);
-                TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
+                //TextBox enginetypenameFooter = (GridView1.FooterRow.FindControl("txt_EngineTypeNameFooter") as TextBox);
 
                 DataTable datatable = GetMessageTypes().Copy();
                 DataRow dr = null;
                 dr = datatable.NewRow();
                 if (dr != null)
                 {
-                    if ((messagetypeFooter.Text.Length == 0) || (processtorunFooter.Text.Length == 0) || (securityvalueFooter.Text.Length == 0) || (enginetypenameFooter.Text.Length == 0))
+                    if ((messagetypeFooter.Text.Length == 0) || (processtorunFooter.Text.Length == 0) || (securityvalueFooter.Text.Length == 0))// || (enginetypenameFooter.Text.Length == 0))
                     {
                         lblErrorMessage.Text = "Please enter value in all the columns";
                     }
@@ -165,7 +165,7 @@ namespace HL7Messages
                         dr["MessageType"] = messagetypeFooter.Text;
                         dr["ProcessToRun"] = processtorunFooter.Text;
                         dr["SecurityValue"] = securityvalueFooter.Text;
-                        dr["EngineTypeName"] = enginetypenameFooter.Text;
+                        //dr["EngineTypeName"] = enginetypenameFooter.Text;
 
                         datatable.Rows.Add(dr);
                         datatable.AcceptChanges();
