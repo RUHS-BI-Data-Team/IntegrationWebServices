@@ -7,7 +7,10 @@ namespace HL7Messages
 {
     public class VXUData
     {
-        HL7Functions frnHL7 = new HL7Functions();
+        Logging log = new Logging();
+        HL7Functions frnHL7;// = HL7Functions;
+        string logFileLocation;
+
         string hL7Message;
         string controlId; //MSH10
         string sendingApplication; //MSH3
@@ -22,10 +25,14 @@ namespace HL7Messages
         string orderingProviderId; // = dbo.ufnParseHL7Value(@Message, 'ORC12.1', 1)
         string site; // = dbo.ufnParseHL7Value(@Message, 'RXR2', 1)
 
-        public VXUData() { }
+        public VXUData(string LogFileLocation) {
+            logFileLocation = LogFileLocation;
+            frnHL7 = new HL7Functions(logFileLocation, "VXU");
+        }
 
-        public VXUData(string HL7Message)
+        public VXUData(string LogFileLocation, string HL7Message)
         {
+            logFileLocation = LogFileLocation;
             ClearValues();
             hL7Message = HL7Message;
             LoadValues();
@@ -50,19 +57,25 @@ namespace HL7Messages
 
         private void LoadValues()
         {
-            controlId = frnHL7.HL7Parser(hL7Message, "MSH10", 0);
-            sendingApplication = frnHL7.HL7Parser(hL7Message, "MSH3", 0);
-            messageDate = frnHL7.ConvertHL7Date2SystemDate(frnHL7.HL7Parser(hL7Message, "MSH7", 0));
-            mRN = frnHL7.FindPaserLocation(hL7Message, "PID3.1", "MRN", "PID3.4");
-            hL7Event = frnHL7.HL7Parser(hL7Message, "MSH9.2", 0);
-            sendingFacility = frnHL7.HL7Parser(hL7Message, "MSH4", 0);
-            administeredCodeId = frnHL7.HL7Parser(hL7Message, "RXA5.1", 1);
-            administeredCodeText = frnHL7.HL7Parser(hL7Message, "RXA5.2", 1);
-            administrationDateTime = frnHL7.ConvertHL7Date2SystemDate(frnHL7.HL7Parser(hL7Message, "RXA3", 1));
-            orderNumber = frnHL7.HL7Parser(hL7Message, "ORC2.1", 1);
-            orderingProviderId = frnHL7.HL7Parser(hL7Message, "ORC12.1", 1);
-            site = frnHL7.HL7Parser(hL7Message, "RXR2", 1);
-
+            try
+            {
+                controlId = frnHL7.HL7Parser(hL7Message, "MSH10", 0);
+                sendingApplication = frnHL7.HL7Parser(hL7Message, "MSH3", 0);
+                messageDate = frnHL7.ConvertHL7Date2SystemDate(frnHL7.HL7Parser(hL7Message, "MSH7", 0));
+                mRN = frnHL7.FindPaserLocation(hL7Message, "PID3.1", "MRN", "PID3.4");
+                hL7Event = frnHL7.HL7Parser(hL7Message, "MSH9.2", 0);
+                sendingFacility = frnHL7.HL7Parser(hL7Message, "MSH4", 0);
+                administeredCodeId = frnHL7.HL7Parser(hL7Message, "RXA5.1", 1);
+                administeredCodeText = frnHL7.HL7Parser(hL7Message, "RXA5.2", 1);
+                administrationDateTime = frnHL7.ConvertHL7Date2SystemDate(frnHL7.HL7Parser(hL7Message, "RXA3", 1));
+                orderNumber = frnHL7.HL7Parser(hL7Message, "ORC2.1", 1);
+                orderingProviderId = frnHL7.HL7Parser(hL7Message, "ORC12.1", 1);
+                site = frnHL7.HL7Parser(hL7Message, "RXR2", 1);
+            }
+            catch(Exception e)
+            {
+                log.LogVXUError(logFileLocation, "Parsing", e.Message);
+            }
         }
 
         private void ClearValues()

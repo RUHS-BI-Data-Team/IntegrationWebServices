@@ -77,7 +77,9 @@
     <Content Include="Images\save.png" />
     <Content Include="Login.aspx" />
     <Content Include="MessageTypes.aspx" />
-    <Content Include="MessageTypes.xml" />
+    <Content Include="MessageTypes.xml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>

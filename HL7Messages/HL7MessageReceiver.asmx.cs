@@ -26,10 +26,10 @@ namespace HL7Messages
         Logging log = new Logging();
         string conn = ConfigurationManager.ConnectionStrings["HL7Warehouse"].ConnectionString;
         ValidateReturn r = new ValidateReturn();
-        ADTData d = new ADTData();
-        string CheckErrorMessage = "";
+        //ADTData d = new ADTData();
+        //string CheckErrorMessage = "";
         string LoadErrorMessage = "";
-        string TypesErrorMessage = "";
+        //string TypesErrorMessage = "";
         DataTable dtTypes = new DataTable("MessageTypes");
         [WebMethod]
         [SoapDocumentMethod]
@@ -60,7 +60,7 @@ namespace HL7Messages
                     r.Validate = Passphrase;
                     break;
                 case 1: //ADT
-                    ADTData d = new ADTData();
+                    ADTData d = new ADTData(Server.MapPath("~/"));
                    d.HL7Message = HL7Message.Replace("\n", "\r");
 
 
@@ -76,8 +76,15 @@ namespace HL7Messages
                    
                     break;
                 case 2: //VXU
-                    VXUData v = new VXUData();
-                    v.HL7Message = HL7Message.Replace("\n", "\r");
+                    VXUData v = new VXUData(Server.MapPath("~/"));
+                    try{
+                        v.HL7Message = HL7Message.Replace("\n", "\r");
+                    }
+                    catch(Exception e)
+                    {
+                        log.LogVXUError(Server.MapPath("~/"), "LoadingHL7", e.Message);
+                        break;
+                    }
                     if (dbf.InsertVXUMessage(conn, v, ref LoadErrorMessage) == true)
                     {
                         r.Validate = Passphrase;
@@ -85,7 +92,7 @@ namespace HL7Messages
                     else
                     {
                         r.Validate = LoadErrorMessage;
-                        log.LogVXUError(Server.MapPath("~/"), "2", LoadErrorMessage);
+                        log.LogVXUError(Server.MapPath("~/"), "DataBase", LoadErrorMessage);
                     }
                     break;
             }

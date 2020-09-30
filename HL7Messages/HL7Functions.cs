@@ -7,26 +7,42 @@ namespace HL7Messages
 {
     public class HL7Functions
     {
+        public HL7Functions(string LogFileLocation, string MessageType)
+        {
+            logFileLocation = LogFileLocation;
+            messageType = MessageType;
+        }
+        Logging log = new Logging();
+        string logFileLocation;
+        string messageType;
         HL7ParseAndScub.LightWeightParser parser = new HL7ParseAndScub.LightWeightParser();
         public DateTime? ConvertHL7Date2SystemDate(string HL7Date)
         {
             DateTime? returnValue = null;
-            if (HL7Date.Length >= 8)
-            { 
-            String Year, Month, Day, Hour, Minute, Second;
-            Year = HL7Date.Substring(0, 4);
-            Month = HL7Date.Substring(4, 2);
-            Day = HL7Date.Substring(6, 2);
-                if (HL7Date.Length > 12){
-                    Hour = HL7Date.Substring(8, 2);
-                    Minute = HL7Date.Substring(10, 2);
-                    Second = HL7Date.Substring(12);
-                }
-                else
+            try
+            {
+                if (HL7Date.Length >= 8)
                 {
-                    Hour = ""; Minute = ""; Second = "";
+                    String Year, Month, Day, Hour, Minute, Second;
+                    Year = HL7Date.Substring(0, 4);
+                    Month = HL7Date.Substring(4, 2);
+                    Day = HL7Date.Substring(6, 2);
+                    if (HL7Date.Length > 12)
+                    {
+                        Hour = HL7Date.Substring(8, 2);
+                        Minute = HL7Date.Substring(10, 2);
+                        Second = HL7Date.Substring(12);
+                        returnValue = DateTime.Parse(Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second);
+                    }
+                    else
+                    {
+                        returnValue = DateTime.Parse(Month + "/" + Day + "/" + Year + " 00:00");
+                    }
                 }
-            returnValue = DateTime.Parse(Month + "/" + Day + "/" + Year + " " + Hour + ":" + Minute + ":" + Second);
+            }
+            catch(Exception e)
+            {
+                log.LogVXUError(logFileLocation, messageType + "ConvertHL7Date2SystemDate:" + HL7Date, e.Message);
             }
             return returnValue;
         }

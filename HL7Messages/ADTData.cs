@@ -13,9 +13,9 @@ namespace HL7Messages
 
     public class ADTData
     {
-        //GeoCodeResult gcResult = new GeoCodeResult();
-        //GeoCodeAddress gcAddress = new GeoCodeAddress();
-        HL7Functions frnHL7 = new HL7Functions();
+        Logging log = new Logging();
+        HL7Functions frnHL7;// = HL7Functions;
+        string logFileLocation;
         string hL7Message;
         string controlId; //MSH10
         string sendingApplication; //MSH3
@@ -26,14 +26,18 @@ namespace HL7Messages
         string patientClass; // = dbo.ufnParseHL7Value(@Message, 'PV12', 1)
         string pV13; //= dbo.ufnParseHL7Value(@Message, 'PV13', 0)
         string encounter;// = dbo.ufnParseHL7Value(@Message, 'PID18', 1)
-       
-        public ADTData() { }
+
+        public ADTData(string LogFileLocation)
+        {
+            logFileLocation = LogFileLocation;
+            frnHL7 = new HL7Functions(logFileLocation, "ADT");
+        }
 
         public string GetControlId(string HL7Message)
         {
             return controlId = frnHL7.HL7Parser(HL7Message, "MSH10", 0);
         }
-        public ADTData(string HL7Message)
+        public ADTData(string LogFileLocation, string HL7Message)
         {
             ClearValues();
             hL7Message = HL7Message;
