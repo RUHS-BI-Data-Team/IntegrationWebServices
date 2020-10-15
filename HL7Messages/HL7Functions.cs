@@ -40,14 +40,25 @@ namespace HL7Messages
                     }
                 }
             }
-            catch(Exception e)
+            catch (Exception e)
             {
-                log.LogVXUError(logFileLocation, messageType + "ConvertHL7Date2SystemDate:" + HL7Date, e.Message);
+                if (messageType == "ADT")
+                {
+                    log.LogADTError(logFileLocation, messageType + "ConvertHL7Date2SystemDate:" + HL7Date, e.Message);
+                }
+                else if (messageType == "VXU")
+                {
+                    log.LogVXUError(logFileLocation, messageType + "ConvertHL7Date2SystemDate:" + HL7Date, e.Message);
+                }
+                else if (messageType == "RDE")
+                {
+                    log.LogRDEError(logFileLocation, messageType + "ConvertHL7Date2SystemDate:" + HL7Date, e.Message);
+                }
             }
             return returnValue;
         }
-       
-        public String FindPaserLocation(string HL7Message, string HL7ElementLocation, string MatchValue, string HL7ElementMatchLocation)
+
+           public String FindPaserLocation(string HL7Message, string HL7ElementLocation, string MatchValue, string HL7ElementMatchLocation)
         {
             //HL7ParseAndScub.LightWeightParser parser = new HL7ParseAndScub.LightWeightParser();
             string returnValue = "";

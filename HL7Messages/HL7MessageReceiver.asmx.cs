@@ -71,7 +71,7 @@ namespace HL7Messages
                     else
                     {
                         r.Validate = LoadErrorMessage;
-                        log.LogADTError(Server.MapPath("~/"), "1", LoadErrorMessage);
+                        log.LogADTError(Server.MapPath("~/"), "ADT Database", LoadErrorMessage);
                     }
                    
                     break;
@@ -92,9 +92,32 @@ namespace HL7Messages
                     else
                     {
                         r.Validate = LoadErrorMessage;
-                        log.LogVXUError(Server.MapPath("~/"), "DataBase", LoadErrorMessage);
+                        log.LogVXUError(Server.MapPath("~/"), "VXU DataBase", LoadErrorMessage);
                     }
                     break;
+
+                case 3: //RDE
+                    RDEData rde = new RDEData(Server.MapPath("~/"));
+                    try
+                    {
+                        rde.HL7Message = HL7Message.Replace("\n", "\r");
+                    }
+                    catch (Exception e)
+                    {
+                        log.LogRDEError(Server.MapPath("~/"), "LoadingHL7", e.Message);
+                        break;
+                    }
+                    if (dbf.InsertRDEMessage(conn, rde, ref LoadErrorMessage) == true)
+                    {
+                        r.Validate = Passphrase;
+                    }
+                    else
+                    {
+                        r.Validate = LoadErrorMessage;
+                        log.LogRDEError(Server.MapPath("~/"), "RDE DataBase", LoadErrorMessage);
+                    }
+                    break;
+
             }
             return r;
         }

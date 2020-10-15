@@ -27,13 +27,19 @@
   <MessageTypes>
     <Id>2</Id>
     <MessageType>ORUFromNovius</MessageType>
-    <ProcessToRun>3</ProcessToRun>
+    <ProcessToRun>4</ProcessToRun>
     <SecurityValue>malamahitaahe</SecurityValue>
   </MessageTypes>
   <MessageTypes>
     <Id>3</Id>
     <MessageType>VXUfromEpic</MessageType>
     <ProcessToRun>2</ProcessToRun>
+    <SecurityValue>malamahitaahe</SecurityValue>
+  </MessageTypes>
+  <MessageTypes>
+    <Id>4</Id>
+    <MessageType>RDEfromEpic</MessageType>
+    <ProcessToRun>3</ProcessToRun>
     <SecurityValue>malamahitaahe</SecurityValue>
   </MessageTypes>
 </NewDataSet>

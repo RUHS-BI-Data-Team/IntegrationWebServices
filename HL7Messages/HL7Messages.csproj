@@ -120,6 +120,7 @@
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="DataStructures.cs" />
+    <Compile Include="RDEData.cs" />
     <Compile Include="VXUData.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -127,7 +128,8 @@
       <SubType>Designer</SubType>
     </None>
     <None Include="packages.config" />
-    <None Include="Properties\PublishProfiles\FolderProfile.pubxml" />
+    <None Include="Properties\PublishProfiles\HL7WebServices Test.pubxml" />
+    <None Include="Properties\PublishProfiles\HL7WebServicesProd.pubxml" />
     <None Include="Properties\PublishProfiles\PublishToProd.pubxml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>

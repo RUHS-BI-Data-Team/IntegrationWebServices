@@ -141,5 +141,50 @@ namespace HL7Messages
                 cn.Close();
             }
         }
+
+        public Boolean InsertRDEMessage(string connectionString, RDEData RDEMessage, ref string ErrorMessage)
+        {
+            SqlConnection cn = new SqlConnection(connectionString);
+            try
+            {
+                SqlCommand cm = new SqlCommand("uspInsertRDEData", cn);
+                cm.CommandType = CommandType.StoredProcedure;
+                cm.Parameters.Add(new SqlParameter("@HL7Message", SqlDbType.NVarChar, -1)).Value = RDEMessage.HL7Message;
+                cm.Parameters.Add(new SqlParameter("@ControlId", SqlDbType.NVarChar, 20)).Value = RDEMessage.ControlId;
+                cm.Parameters.Add(new SqlParameter("@SendingApplication", SqlDbType.NVarChar, 10)).Value = RDEMessage.SendingApplication;
+                cm.Parameters.Add(new SqlParameter("@MessageDate", SqlDbType.DateTime, 8)).Value = RDEMessage.MessageDate;
+                cm.Parameters.Add(new SqlParameter("@MRN", SqlDbType.NVarChar, 15)).Value = RDEMessage.MRN;
+                cm.Parameters.Add(new SqlParameter("@Event", SqlDbType.NVarChar, 3)).Value = RDEMessage.HL7Event;
+                cm.Parameters.Add(new SqlParameter("@SendingFacility", SqlDbType.NVarChar, 50)).Value = RDEMessage.SendingFacility;
+                cm.Parameters.Add(new SqlParameter("@PatientClass", SqlDbType.NVarChar, 10)).Value = RDEMessage.PatientClass;
+                cm.Parameters.Add(new SqlParameter("@Encounter", SqlDbType.NVarChar, 15)).Value = RDEMessage.Encounter;
+                cm.Parameters.Add(new SqlParameter("@HL7PatientFamilyName", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7PatientFamilyName;
+                //cm.Parameters.Add(new SqlParameter("@HL7PatientDateOfBirth", SqlDbType.DateTime, 8)).Value = RDEMessage.HL7PatientDateOfBirth;
+                //cm.Parameters.Add(new SqlParameter("@HL7OrderControl", SqlDbType.NVarChar, 5)).Value = RDEMessage.HL7OrderControl;
+                //cm.Parameters.Add(new SqlParameter("@HL7FillerOrderNumber", SqlDbType.NVarChar, 25)).Value = RDEMessage.HL7FillerOrderNumber;
+                //cm.Parameters.Add(new SqlParameter("@HL7QantityStartDateTime", SqlDbType.DateTime, 8)).Value = RDEMessage.HL7QantityStartDateTime;
+                //cm.Parameters.Add(new SqlParameter("@HL7OrderringProviderNPI", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7OrderringProviderNPI;
+                //cm.Parameters.Add(new SqlParameter("@HL7NDCorRxNormCode", SqlDbType.NVarChar, 20)).Value = RDEMessage.HL7NDCorRxNormCode;
+                cm.Parameters.Add(new SqlParameter("@HL7GiveDosageForm", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7GiveDosageForm;
+                cm.Parameters.Add(new SqlParameter("@HL7GiveAmount", SqlDbType.NVarChar, 25)).Value = RDEMessage.HL7GiveAmount;
+                cm.Parameters.Add(new SqlParameter("@HL7GiveUnits", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7GiveUnits;
+                //cm.Parameters.Add(new SqlParameter("@HL7Sig", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7Sig;
+                //cm.Parameters.Add(new SqlParameter("@HL7Route", SqlDbType.NVarChar, 255)).Value = RDEMessage.HL7Route;
+
+                cn.Open();
+                cm.ExecuteNonQuery();
+                cn.Close();
+                return true;
+            }
+            catch (Exception e)
+            {
+                ErrorMessage = e.Message;
+                return false;
+            }
+            finally
+            {
+                cn.Close();
+            }
+        }
     }
 }

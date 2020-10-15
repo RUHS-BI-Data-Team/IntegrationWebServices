@@ -50,5 +50,20 @@ namespace HL7Messages
                 sw.Close();
             }
         }
+
+        public void LogRDEError(String FileLocation, string ProcessName, string ErrorMessage)
+        {
+            if (!File.Exists(FileLocation + "RDEErrorLog.txt"))
+            {
+                FileStream fs = File.Create(FileLocation + "RDEErrorLog.txt");
+                fs.Close();
+
+            }
+            using (StreamWriter sw = new StreamWriter(FileLocation + "RDEErrorLog.txt", true))
+            {
+                sw.WriteLine(DateTime.Now.ToString() + ", ProcessId=" + ProcessName + ", ErrorMessage=" + ErrorMessage);
+                sw.Close();
+            }
+        }
     }
 }
