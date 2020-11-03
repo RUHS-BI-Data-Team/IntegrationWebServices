@@ -56,7 +56,7 @@ namespace HL7Messages
             {
                 case 0:
                     //log requests that does not match security
-                    log.SecurityValuesDonotMatch(Server.MapPath("~/"), "0", MessageType, Passphrase);
+                    log.SecurityValuesDonotMatch(Server.MapPath("~/"), "MessageTypeRecordCount:" + dtTypes.Rows.Count, MessageType, Passphrase);
                     r.Validate = Passphrase;
                     break;
                 case 1: //ADT
