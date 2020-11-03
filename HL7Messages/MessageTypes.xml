@@ -20,13 +20,13 @@
   </xs:schema>
   <MessageTypes>
     <Id>1</Id>
-    <MessageType>ADTFromEpic</MessageType>
+    <MessageType>ADTfromEpic</MessageType>
     <ProcessToRun>1</ProcessToRun>
     <SecurityValue>malamahitaahe</SecurityValue>
   </MessageTypes>
   <MessageTypes>
     <Id>2</Id>
-    <MessageType>ORUFromNovius</MessageType>
+    <MessageType>ORUfromNovius</MessageType>
     <ProcessToRun>4</ProcessToRun>
     <SecurityValue>malamahitaahe</SecurityValue>
   </MessageTypes>
