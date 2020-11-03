@@ -14,6 +14,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "HL7ParseAndScub", "..\HL7To
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Intgn.Libraries", "..\Libraries\Intgn.Libraries\Intgn.Libraries.csproj", "{A3B9274D-2262-4544-BD99-CB1EBDEF9C7A}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "GeoCodeADTMessagesCL", "GeoCodeADTMessagesCL\GeoCodeADTMessagesCL.csproj", "{84EA2239-26C1-4B3F-BC33-6F0A239E5FF4}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -36,6 +38,10 @@ Global
 		{A3B9274D-2262-4544-BD99-CB1EBDEF9C7A}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{A3B9274D-2262-4544-BD99-CB1EBDEF9C7A}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{A3B9274D-2262-4544-BD99-CB1EBDEF9C7A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{84EA2239-26C1-4B3F-BC33-6F0A239E5FF4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{84EA2239-26C1-4B3F-BC33-6F0A239E5FF4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{84EA2239-26C1-4B3F-BC33-6F0A239E5FF4}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{84EA2239-26C1-4B3F-BC33-6F0A239E5FF4}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
